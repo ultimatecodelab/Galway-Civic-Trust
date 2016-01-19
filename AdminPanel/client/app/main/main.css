@@ -1,0 +1,83 @@
+.listing-image img {
+  max-height: 300px;
+  max-width: 300px;
+}
+.lookLink {
+  color: #000;
+  text-decoration: none;
+}
+.lookLink:hover {
+  text-decoration: none;
+  color: #000;
+}
+.well.well-lg {
+  width: 400px;
+  padding: 10px 15px;
+}
+.inputArea {
+  width: 300px;
+  height: 20px;
+}
+.form-control {
+  display: inline;
+  width: 70%;
+}
+.add-look-btn {
+  margin-left: 20px;
+}
+#searchFilterWrap {
+  margin: 0 auto;
+  margin-top: 15px;
+  margin-bottom: 23px;
+  max-width: 800px;
+  overflow: hidden;
+  padding-right: 350px;
+}
+#searchForm {
+  float: left;
+  position: relative;
+  width: 100%;
+}
+#searchForm .icon-search {
+  font-size: 22px;
+  position: absolute;
+  right: 10px;
+  top: 8px;
+}
+#searchBox {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  height: 40px;
+  outline: 0;
+  padding-left: 15px;
+  padding-right: 40px;
+  width: 100%;
+}
+#sortByWrap {
+  float: left;
+  margin-right: -1500px;
+  padding-left: 10px;
+}
+#sortByWrap [class^=icon-],#sortByWrap [class*=" icon-"] {
+  background: none repeat scroll 0 0 #f7faff;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 18px;
+  height: 40px;
+  line-height: 40px;
+  margin-right: 5px;
+  text-align: center;
+  width: 40px;
+}
+#sortByWrap i {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 18px;
+  height: 40px;
+  line-height: 40px;
+  margin-right: 5px;
+  text-align: center;
+  width: 30px
+}
