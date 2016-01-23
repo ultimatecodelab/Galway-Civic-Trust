@@ -1,26 +1,27 @@
 'use strict';
 
 var mongoose = require('mongoose');
-
 var Schema = mongoose.Schema;
 
-//defining the tour schema
-var  TourSchema = new Schema({
-
-	title: String, //title of the tour
-	description:String, //description of the tour
-	image : String, //image of the tour
-	category: String, //category of the tour
-
-	_creator : { //who created this tour
-		type: Schema.ObjectId,
-		ref: 'User'
-	},
-	email:String, //email of the user
-	userName: String, //userName
-	createTime: { //time the tour was created
-		type:Date,
-		'default' : Date.now
-	}
+var TourSchema = new Schema({
+  image: String,
+  title: String,
+  description: String,
+  location: String,
+  xCoordinate: String,
+  yCoordinate: String,
+  imageSource : String,
+  
+  _creator: {
+    type: Schema.ObjectId,
+    ref: 'User'
+  },
+  email: String,
+  userName: String,
+  createTime: {
+    type: Date,
+    'default': Date.now
+  }
 });
-module.exports = moongoose.model('Tour',TourSchema);
+
+module.exports = mongoose.model('Tour', TourSchema);
