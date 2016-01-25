@@ -61,17 +61,7 @@
 	 
     })
 
-	toursAPI.getAllTours()
-      .then(function(data) {
-        console.log('TOURS found ');
-        console.log(data);
-        $scope.tours = data.data;
-        $scope.allData = data.data;
-		console.log($scope.allData);
-      })
-      .catch(function(err) {
-        console.log('failed to get looks ' + err);
-      });
+	
 
     var myModal = $modal({
       scope: $scope,
