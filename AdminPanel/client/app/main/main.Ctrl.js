@@ -4,40 +4,41 @@
   angular
     .module('app')
     .controller('MainCtrl', MainCtrl);
-  
-  MainCtrl.$inject = ['$scope', '$state', 'Auth', '$modal',  '$http', '$alert','Upload'];
 
- //function MainCtrl($scope, $state, Auth, $modal, $http, $alert, looksAPI, Upload) {
-   function MainCtrl($scope, $state, Auth, $modal, $http, $alert, Upload) {
+ // MainCtrl.$inject = ['$scope', '$state', 'Auth', '$modal',  '$http', '$alert', 'toursAPI', 'Upload'];
+  
+  MainCtrl.$inject = ['$scope', '$state', 'Auth', '$modal',  '$http', '$alert','Upload','toursAPI'];
+
+ function MainCtrl($scope, $state, Auth, $modal, $http, $alert, Upload,toursAPI) {
+  //function MainCtrl($scope, $state, Auth, $modal, $alert) {
     $scope.user = Auth.getCurrentUser();
 
-    
+   // $scope.look = {};
 	$scope.tour = {};
-    $scope.tour = [];
+	
+	//$scope.looks = [];
+    $scope.tours = [];
 	
     $scope.picPreview = true;
+  //  $scope.uploadLookTitle = true;
+    $scope.uploadLookForm = false;
+	
 	
 	//--------------------------------
 	 $scope.uploadTourTitle = true;
      $scope.uploadTourForm = false;
 	//------------------------------
-//----------------------TEST-----------------
-
-	
-
+	//---------------init---------------
 	$scope.tour.title = "Arjun";
-	$scope.tour.location = "66, Lower Newcastle Road Galway";
-	$scope.tour.description = "This is super awesome";
-	$scope.tour.xCoordinate = "53.232";
-	$scope.tour.yCoordinate = "-9.205";
-	$scope.tour.imageSource = "https://www.siliconrepublic.com/wp-content/uploads/2016/01/Cancer_research-718x523.jpg";
-	
-	console.log($scope.tour);
-	
-	
-	//---------------------------------------------
+	$scope.tour.location = "Galway";
+	$scope.tour.description = "Description";
+	$scope.tour.xCoordinate = "4343";
+	$scope.tour.yCoordinate = "4343";
+	$scope.tour.imageSource = "No source";
+
     //$scope.busy = true;
     $scope.allData = [];
+	$scope.allTours = [];
     var page = 0;
     var step = 3;
 
@@ -57,7 +58,20 @@
       container: '#alertContainer',
       type: 'warning',
       duration: 8
+	 
     })
+
+	toursAPI.getAllTours()
+      .then(function(data) {
+        console.log('TOURS found ');
+        console.log(data);
+        $scope.tours = data.data;
+        $scope.allData = data.data;
+		console.log($scope.allData);
+      })
+      .catch(function(err) {
+        console.log('failed to get looks ' + err);
+      });
 
     var myModal = $modal({
       scope: $scope,
@@ -68,7 +82,9 @@
       myModal.$promise.then(myModal.show);
     }
 	
-	$scope.uploadPic = function(file) {
+	
+    $scope.uploadPic = function(file) {
+	console.log($scope.tour);
       Upload.upload({
         url: '/api/tour/upload',
         headers: {
@@ -76,36 +92,38 @@
         },
         data: {
           file: file,
-          title : $scope.tour.title,
+          title: $scope.tour.title,
 		  location: $scope.tour.location,
           description: $scope.tour.description,
-		  
 		  xCoordinate : $scope.tour.xCoordinate,
 		  yCoordinate : $scope.tour.yCoordinate,
+		  imageSource: $scope.tour.imageSource,
 		  
-		  imageSource : $scope.tour.imageSource,
 		  
           email: $scope.user.email,
-          userName: $scope.user.name,
-          //linkURL: $scope.look._id,
+          name: $scope.user.name,
           _creator: $scope.user._id
         }
       }).then(function(resp) {
+		alertSuccess.show();
         console.log('success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-        $scope.tours.splice(0, 0, resp.data);
         $scope.tour.title = '';
-        $scope.title.description = '';
+        $scope.tour.description = '';
+		$scope.tour.xCoordinate = ' ' ;
+		$scope.tour.yCoordinate = ' ' ;
+		$scope.tour.imageSource = ' ' ;
+		$scope.tour.location = ' ' ;
         $scope.picFile = '';
         $scope.picPreview = false;
-        alertSuccess.show();
+	
+       
       }, function(resp) {
-	   console.log(resp);
+	  
         alertFail.show();
       }, function(evt) {
         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
         console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
       });
     }
-
   }
 })();
