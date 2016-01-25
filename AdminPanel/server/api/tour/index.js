@@ -9,6 +9,8 @@ var router  = express.Router();
 var auth = require('../../auth/auth.service');
 
 //Now lets define the routes
+router.post('/upload', auth.isAuthenticated(), controller.upload);
+router.get('/getAllTours',controller.ensureAuthenticated,controller.allTours);
 
 
 module.exports = router;

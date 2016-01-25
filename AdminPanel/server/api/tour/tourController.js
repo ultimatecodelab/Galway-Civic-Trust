@@ -6,6 +6,15 @@ var express = require('express');
 var utils = require('../../utils/utils.js');
 
 
+exports.ensureAuthenticated = function(req,res,next){
+	if(req.isAuthenticated()){
+		next();
+	}
+	else{
+	res.send(403);
+	//dostuff
+	}
+}
 exports.upload = function(req, res) {
 
 console.log(req.body);
