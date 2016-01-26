@@ -1,16 +1,35 @@
 'use strict';
-//defining controller
-var controller  =  require('./tourController');
+
+var controller = require('./tour.controller');
 var express = require('express');
-var router  = express.Router();
-
-//importing authencation for protecting the router
-
+var router = express.Router();
 var auth = require('../../auth/auth.service');
+var basicAuth = require('basic-auth');
 
-//Now lets define the routes
+
+var basicAuthentication = function (req, res, next) {
+  function unauthorized(res) {
+    res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
+    return res.send(401);
+  };
+
+  var user = basicAuth(req);
+
+  if (!user || !user.name || !user.pass) {
+    return unauthorized(res);
+  };
+
+  if (user.name === 'foo' && user.pass === 'bar') {
+    return next();
+  } else {
+    return unauthorized(res);
+  };
+};
+
 router.post('/upload', auth.isAuthenticated(), controller.upload);
-router.get('/getAllTours',controller.ensureAuthenticated,controller.allTours);
 
+router.get('/getAllTours', controller.allTours);
+
+router.get('/getAllToursJson',basicAuthentication, controller.allTours);
 
 module.exports = router;
