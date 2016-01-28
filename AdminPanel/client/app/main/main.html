@@ -9,17 +9,48 @@
                     ng-model-options="{debounce : 600}" />
         </form>
 
-      <div class="row">
-        <div id="sortByWrap">
-          
+        <div class="modal-backdrop-am-fade"
+              id="sortByWrap">
+          Sort By : <i class="fa fa-calendar"
+                            ng-click="sortByTime()"></i>
+                       
 
-          <button class="btn btn-primary add-look-btn"
+          <button class="btn btn-primary"
                       data-animation="am-fade-and-scale"
                       data-placement="center"
-                      data-template-url="app/main/addTourModal.html"
+                      data-template-url="app/main/addLookModal.html"
                       bs-modal="showModal">Add New Tour</button>
-              </div>
             </div>
           </div>
 
+  <!-- Angular Grid -->
+  <div class="container" infinite-scroll="nextPage()" infinite-scroll-disabled="busy || noMoreData" infinite-scroll-distance="0.1">
+    <ul class="dynamic-grid angular-grid"
+          angular-grid="looks"
+          grid-width="275"
+          gutter-size="10"
+          angular-grid-id="gallery"
+          refresh-on-img-load="true">
+     <li data-ng-repeat="look in looks track by $index"
+          class="grid"
+          ng-cloak>
+        <a ui-sref="look ({ lookId: look._id })"
+            class="lookLink">
+          <img ng-src="{{ look.image }}"
+                  class="grid-img"
+                  data-actual-width="{{ look.actualWidth }}"
+                  data-actual-height="{{ look.actualHeight }}" />
+          <div class="look-description-trim">
+            {{ look.description.substr(0,127) }}
+          </div>
+
+          <div class="titleClass">
+            {{ look.title }}
+          </div>
+        </a>
+        
+      </li>
+    </ul>
+    <div ng-show='busy'>Loading data...</div>
+  </div>
 </div>
