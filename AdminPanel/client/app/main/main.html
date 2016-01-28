@@ -9,21 +9,20 @@
                     ng-model-options="{debounce : 600}" />
         </form>
 
-        <div class="modal-backdrop-am-fade"
-              id="sortByWrap">
-          Sort By : <i class="fa fa-calendar"
-                            ng-click="sortByTime()"></i>
-                       
+      <div class="row">
+        <div id="sortByWrap">
+          
 
-          <button class="btn btn-primary"
+          <button class="btn btn-primary add-look-btn"
                       data-animation="am-fade-and-scale"
                       data-placement="center"
-                      data-template-url="app/main/addLookModal.html"
+                      data-template-url="app/main/addTourModal.html"
                       bs-modal="showModal">Add New Tour</button>
+              </div>
             </div>
           </div>
-
-  <!-- Angular Grid -->
+		  
+	<!-- Angular Grid -->
   <div class="container" infinite-scroll="nextPage()" infinite-scroll-disabled="busy || noMoreData" infinite-scroll-distance="0.1">
     <ul class="dynamic-grid angular-grid"
           angular-grid="looks"
@@ -53,4 +52,5 @@
     </ul>
     <div ng-show='busy'>Loading data...</div>
   </div>
+
 </div>
