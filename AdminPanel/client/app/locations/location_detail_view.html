@@ -1,0 +1,57 @@
+<div class="container">
+      <!-- Search, and Upload Button -->
+      <div id="searchFilterWrap">
+        <form id="searchForm">
+          <input type="text"
+                    id="searchBox"
+                    placeholder="Search by title"
+                    ng-model="searchTxt"
+                    ng-model-options="{debounce : 600}" />
+        </form>
+        <div class="modal-backdrop-am-fade"
+              id="sortByWrap">
+          Sort By : <i class="fa fa-calendar"
+                            ng-click="sortByTime()"></i>
+                    
+
+          <button class="btn btn-primary"
+                      data-animation="am-fade-and-scale"
+                      data-placement="center"
+                      data-template-url="app/location/addLocationModal.html"
+                      bs-modal="showModal">Add New Location</button>
+            </div>
+		
+      
+    </div>
+
+  <!-- Angular Grid -->
+  <!-- <div class="container" infinite-scroll="nextPage()" infinite-scroll-disabled="busy || noMoreData" infinite-scroll-distance="0.1">
+    <ul class="dynamic-grid angular-grid"
+          angular-grid="tours"
+          grid-width="275"
+          gutter-size="10"
+          angular-grid-id="gallery"
+          refresh-on-img-load="true">
+     <li data-ng-repeat="tour in tours track by $index"
+          class="grid"
+          ng-cloak>
+        <a ui-sref="look({ tourId: tour._id })"
+            class="lookLink">
+          <img ng-src="{{ tour.image }}"
+                  class="grid-img"
+                  data-actual-width="{{ (tour.image.actualWidth)}}*.8"
+                  data-actual-height="{{ (tour.image.actualHeight)}}*.8" />
+				  
+		  <div class="titleClass">
+            Tour: {{ tour.title.substr(0,50) }}
+          </div>
+          <div class="look-description-trim">
+            {{ tour.description.substr(0,80)}}
+          </div>
+          
+        </a>
+      </li>
+    </ul>
+   <div ng-show='busy'>Loading data...</div>
+  </div>-->
+</div>
