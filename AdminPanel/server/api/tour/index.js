@@ -1,6 +1,7 @@
 'use strict';
 
 var controller = require('./tour.controller');
+var tourLocationController = require('./tourLocationController');
 var express = require('express');
 var router = express.Router();
 var auth = require('../../auth/auth.service');
@@ -27,6 +28,8 @@ var basicAuthentication = function (req, res, next) {
 };
 
 router.post('/upload', auth.isAuthenticated(), controller.upload);
+
+router.post('/uploadLocation', auth.isAuthenticated(), tourLocationController.upload);
 
 router.get('/getAllTours', controller.allTours);
 
