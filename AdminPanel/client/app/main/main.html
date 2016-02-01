@@ -8,12 +8,11 @@
                     ng-model="searchTxt"
                     ng-model-options="{debounce : 600}" />
         </form>
-
         <div class="modal-backdrop-am-fade"
               id="sortByWrap">
           Sort By : <i class="fa fa-calendar"
                             ng-click="sortByTime()"></i>
-                       
+                    
 
           <button class="btn btn-primary"
                       data-animation="am-fade-and-scale"
@@ -21,7 +20,9 @@
                       data-template-url="app/main/addTourModal.html"
                       bs-modal="showModal">Add New Tour</button>
             </div>
-          </div>
+		
+      
+    </div>
 
   <!-- Angular Grid -->
    <div class="container" infinite-scroll="nextPage()" infinite-scroll-disabled="busy || noMoreData" infinite-scroll-distance="0.1">
@@ -34,22 +35,21 @@
      <li data-ng-repeat="tour in tours track by $index"
           class="grid"
           ng-cloak>
-        <a ui-sref="look ({ tourId: tour._id })"
+        <a ui-sref="location({ tourId: tour._id })"
             class="lookLink">
           <img ng-src="{{ tour.image }}"
                   class="grid-img"
                   data-actual-width="{{ (tour.image.actualWidth)}}*.8"
                   data-actual-height="{{ (tour.image.actualHeight)}}*.8" />
+				  
+		  <div class="titleClass">
+            Tour: {{ tour.title.substr(0,50) }}
+          </div>
           <div class="look-description-trim">
-            {{ tour.description.substr(0,127) }}
+            {{ tour.description.substr(0,80)}}
           </div>
-
-          <div class="titleClass">
-            {{ tour.title }}
-          </div>
+          
         </a>
-		
-        
       </li>
     </ul>
    <div ng-show='busy'>Loading data...</div>
