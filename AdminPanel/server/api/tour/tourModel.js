@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 var TourSchema = new Schema({
   image: String,
   title: String,
-  description: String,
+ /* description: String,
   location: String,
   xCoordinate: String,
   yCoordinate: String,
@@ -16,8 +16,8 @@ var TourSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'User'
   },
-  email: String,
-  userName: String,
+  //email: String,
+  //userName: String,*/
   createTime: {
     type: Date,
     'default': Date.now
