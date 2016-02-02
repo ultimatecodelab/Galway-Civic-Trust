@@ -9,17 +9,24 @@
 
     function toursAPI($http) {
       return {
-        getAllTours: getAllTours
+        getAllTours: getAllTours,
+		getLocationsOfThisCategory: getLocationsOfThisCategory
+		 //getUserTours: getUserTours
       }
 
       function getAllTours() {
+	  
         return $http.get('/api/tour/getAllTours', {
           cache: true
         });
       }
 
-  
-
+   function getLocationsOfThisCategory(id) {
+        return $http.get('/api/tour/getLocations/?tourId=' + id, {
+          cache: true
+        });
+      }
+	
     
     }
 })();
