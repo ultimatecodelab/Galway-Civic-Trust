@@ -4,6 +4,28 @@ var path = require('path');
 var express = require('express');
 var utils = require('../../utils/utils.js');
 
+
+exports.locations = function(req, res) {
+  var id = req.query.id;
+  LocationSchema.find({
+    tourId: {
+      $in: id
+    }
+  })
+  .sort({
+    createTime: -1
+  })
+  .exec(function(err, locations) {
+    if(err) {
+      return handleError(res, err);
+    }
+    console.log(locations);
+    return res.status(200)
+                   .json(locations);
+  });
+};
+
+
 exports.upload = function(req, res) {
   var newLocation = new LocationSchema();
   var fileimage = req.middlewareStorage.fileimage;
