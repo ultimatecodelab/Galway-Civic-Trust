@@ -30,6 +30,8 @@ var basicAuthentication = function (req, res, next) {
 router.post('/upload', auth.isAuthenticated(), controller.upload);
 
 router.post('/uploadLocation', auth.isAuthenticated(), tourLocationController.upload);
+router.get('/getLocations', tourLocationController.locations);
+
 
 router.get('/getAllTours', controller.allTours);
 
