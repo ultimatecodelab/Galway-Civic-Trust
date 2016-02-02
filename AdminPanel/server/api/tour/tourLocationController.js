@@ -6,25 +6,31 @@ var utils = require('../../utils/utils.js');
 
 
 exports.locations = function(req, res) {
-  var id = req.query.id;
+//console.log("Testing...")
+  var id = req.query.tourId;
+  console.log("ID passed as parameter: " + id);
   LocationSchema.find({
     tourId: {
-      $in: id
+      $in: req.query.tourId
     }
   })
   .sort({
     createTime: -1
   })
-  .exec(function(err, locations) {
+  .exec(function(err, spots) {
+  
     if(err) {
+	//console.log("error are: " + err);
       return handleError(res, err);
     }
-    console.log(locations);
+	else{
+		console.log("found...")
+	}
+    console.log("Locations are" + spots);
     return res.status(200)
-                   .json(locations);
+                   .json(spots);
   });
 };
-
 
 exports.upload = function(req, res) {
   var newLocation = new LocationSchema();
