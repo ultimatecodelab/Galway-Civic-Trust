@@ -78,6 +78,106 @@ exports.upload = function(req, res) {
 };
 
 
+exports.singleTour = function(req, res) {
+  Tour.findById(req.params.lookId, function(err, look) {
+    if(err) {
+      return handleError(res, err);
+    }
+    if(!look) {
+      return res.send(404);
+    }
+    return res.json(look);
+  });
+};
+
+exports.popTours = function(req, res) {
+  Tour.find(req.params.id)
+    .sort('-upVotes')
+    .limit(6)
+    .exec(function(err, looks) {
+      if (err) {
+        return handleError(res, err);
+      }
+      console.log(looks);
+      return res.json(looks);
+    });
+}
+
+exports.update = function(req, res) {
+  if(req.body._id) {
+    delete req.body._id;
+  }
+  Tour.findById(req.params.id, function(err, look) {
+    if(err) {
+      return handleError(res, err);
+      }
+      if(!look) {
+        return res.send(404);
+      }
+      var updated = _.merge(look, req.body);
+      updated.save(function(err) {
+        if(err) {
+          return handleError(res, err);
+        }
+        console.log(look);
+        return res.json(look);
+      });
+  });
+};
+
+exports.delete = function(req, res) {
+  Tour.findById(req.params.id, function(err, look) {
+    if(err) {
+      return handleError(res, err);
+    }
+    if(!look) {
+      return res.send(404);
+    }
+    look.remove(function(err) {
+      if(err) {
+        return handleError(res, err);
+      }
+      return res.send(200);
+    });
+  });
+};
+
+exports.addView = function(req, res) {
+  Tour.findById(req.params.id, function(err, look) {
+    if(err) {
+      return handleError(res, err);
+    }
+    if (!tour) {
+      return res.send(404);
+    }
+    tour.views++;
+    tour.save(function(err) {
+      if (err) {
+        return handle(res, err);
+      }
+      return res.json(tour);
+    });
+  });
+};
+
+exports.addUpvote = function(req, res) {
+  Tour.findById(req.params.id, function(err, tour) {
+    if(err) {
+      return handleError(res, err);
+    }
+    if(!tour) {
+      return res.send(404);
+    }
+    tour.upVotes++;
+    tour.save(function(err) {
+      if(err) {
+        return handleError(res, err);
+      }
+      return res.json(tour);
+    });
+  });
+};
+
 function handleError(res, err) {
   return res.send(500, err);
 }

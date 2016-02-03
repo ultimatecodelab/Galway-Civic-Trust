@@ -3,16 +3,18 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <base href="/">
-    <title>Galway-Tour App</title>
+    <title>Galway City Tours</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
       <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
       <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
-	  <link rel="stylesheet" href="bower_components/angular-motion/dist/angular-motion.min.css">
-      <link rel="stylesheet" href="app/css/agency.css" />
+      <link rel="stylesheet" href="bower_components/angular-motion/dist/angular-motion.min.css">
       <link rel="stylesheet" href="app/app.css">
       <link rel="stylesheet" href="app/account/login/login.css">
       <link rel="stylesheet" href="app/main/main.css">
+      <link rel="stylesheet" href="app/location/tour.css">
+      <link rel="stylesheet" href="app/myTours/myLooks.css">
+      <link rel="stylesheet" href="app/admin/admin.css">
       <link rel="stylesheet" href="app/components/navbar/navbar.css">
   </head>
 
@@ -41,15 +43,29 @@
       <script src="app/account/login/login.controller.js"></script>
       <script src="app/account/settings/settings.controller.js"></script>
       <script src="app/account/signup/signup.controller.js"></script>
+      <script src="app/account/profile/profile.Ctrl.js"></script>
 
       <script src="app/main/main_config.js"></script>
       <script src="app/main/main.Ctrl.js"></script>
 
+      <script src="app/location/location_config.js"></script>
+      <script src="app/location/location.Ctrl.js"></script>
+
+      <script src="app/myTours/myLooks_config.js"></script>
+      <script src="app/myTours/myLooks.Ctrl.js"></script>
+
+       <script src="app/admin/admin_config.js"></script>
+      <script src="app/admin/admin.Ctrl.js"></script>
+
       <script src="app/components/auth/auth.Srvc.js"></script>
       <script src="app/components/auth/user.Srvc.js"></script>
+
+      <script src="app/components/apiFactory/toursAPI.js"></script>
+      <script src="app/components/apiFactory/commentAPI.js"></script>
+      <script src="app/components/apiFactory/adminAPI.js"></script>
+
       <script src="app/components/mongoose-error/mongoose-error.directive.js"></script>
       <script src="app/components/navbar/navbar.controller.js"></script>
       <script src="app/components/angulargrid/angulargrid.js"></script>
-	     <script src="app/components/apiFactory/toursAPI.js"></script>
 </body>
 </html>

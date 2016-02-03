@@ -4,11 +4,8 @@
 
 'use strict';
 
-var errors = require('./components/errors');
-//authencation service
+//var errors = require('./components/errors');
 var auth = require('./auth/auth.service');
-
-//path modification
 var path = require('path');
 
 module.exports = function(app) {
@@ -17,13 +14,15 @@ module.exports = function(app) {
   app.use('/api/users', require('./api/user'));
   app.use('/auth', require('./auth'));
 
-  //Tour model -- Defined the routes that we are going to use REST Verbs...
-  app.use('api/tour',require('./api/user'));
+  app.use('/api/tour', require('./api/tour'));
+ 
   app.post('/forgotpassword', require('./forgotpassword').reset);
+  
+  //app.use('/api/cat/', require('./api/look'));
 
   // All undefined asset or api routes should return a 404
-  app.route('/:url(api|auth|components|app|bower_components|assets)/*')
-   .get(errors[404]);
+  //app.route('/:url(api|auth|components|app|bower_components|assets)/*')
+   //.get(errors[404]);
 
 
   app.route('/*')

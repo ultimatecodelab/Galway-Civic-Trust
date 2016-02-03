@@ -7,9 +7,20 @@
 
 module.exports = {
   DOMAIN:           'http://localhost:9000',
-  SESSION_SECRET:   'galwaycivictrustgalway',
-  
- 
+  SESSION_SECRET:   'meanApp-secret',
+
+  FACEBOOK_ID:      'app-id',
+  FACEBOOK_SECRET:  'secret',
+
+  TWITTER_ID:       'app-id',
+  TWITTER_SECRET:   'secret',
+
+  keys:{
+    access: 'AKIAINZITVNGQBZ7GPHA',
+    secret: 'ACCESS_CODE',
+    bucket: 'MY_AWS_BUCKET',
+    region: 'us-west-1'
+  },
   // Control debug level for modules using visionmedia/debug
   DEBUG: ''
 };

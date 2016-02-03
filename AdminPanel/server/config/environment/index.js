@@ -26,7 +26,7 @@ var all = {
 
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {
-    session: 'galwaycivictrustgalway'
+    session: 'meanApp-secret'
   },
 
   // List of user roles
@@ -48,6 +48,17 @@ var all = {
     region: process.env.region
   },
 
+  facebook: {
+    clientID:     process.env.FACEBOOK_ID || 'id',
+    clientSecret: process.env.FACEBOOK_SECRET || 'secret',
+    callbackURL:  (process.env.DOMAIN || '') + '/auth/facebook/callback'
+  },
+
+  twitter: {
+    clientID:     process.env.TWITTER_ID || 'id',
+    clientSecret: process.env.TWITTER_SECRET || 'secret',
+    callbackURL:  (process.env.DOMAIN || '') + '/auth/twitter/callback'
+  },
 
 };
 

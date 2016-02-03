@@ -1,6 +1,8 @@
 'use strict'
 
 /*
+	All the credit goes to, thanks for this wonderful stuff :)
+	
     angularGrid.js v 0.1.2
     Author: Sudhanshu Yadav
     Copyright (c) 2015 Sudhanshu Yadav - ignitersworld.com , released under the MIT license.

@@ -12,7 +12,9 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-    
+      <a class="navbar-brandi" ui-sref="main">
+        
+      </a>
     </div>
 
     <div class="navbar-collapse collapse" ng-class="{'in':!navCollapsed}">
@@ -20,12 +22,18 @@
       <ul class="nav navbar-nav navbar-left">
         <li ng-show="isLoggedIn()" ng-class="{active: isActive('/main')}">
          <a ui-sref="main">Home</a></li>
+		 
 
         <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}">
         <a ui-sref="admin">Admin</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right" >
+
+        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/myTours')}">
+          <a ui-sref="myTours" id="nav-internal">Control Panel</a>
+        </li>
+
         <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}">
         <a ui-sref="signup" id="nav-internal">Sign up</a></li>
 
@@ -33,10 +41,10 @@
         <a ui-sref="login" id="nav-internal">Login</a></li>
 
         <li ng-show="isLoggedIn()">
-        <p class="navbar-text">Hello {{ getCurrentUser().name }}</p> </li>
+		<a ng-disabled="isDisabled" id="nav-internal">{{ getCurrentUser().name}}</a></li>
 
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}">
-        <a href="/settings"><span class="glyphicon glyphicon-cog"></span></a></li>
+        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/profile')}">
+        <a ui-sref="profile"><span class="glyphicon glyphicon-cog"></span></a></li>
 
         <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}">
         <a href="" ng-click="logout()">Logout</a></li>
