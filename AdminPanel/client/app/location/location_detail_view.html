@@ -1,6 +1,7 @@
-<div class="container">
-      <!-- Search, and Upload Button -->
-      <div id="searchFilterWrap">
+
+ <div class="container">   
+ 
+ <div id="searchFilterWrap">
         <form id="searchForm">
           <input type="text"
                     id="searchBox"
@@ -12,46 +13,96 @@
               id="sortByWrap">
           Sort By : <i class="fa fa-calendar"
                             ng-click="sortByTime()"></i>
-                    
-
-          <button class="btn btn-primary"
+							
+							<button class="btn btn-primary"
                       data-animation="am-fade-and-scale"
                       data-placement="center"
                       data-template-url="app/location/addLocationModal.html"
                       bs-modal="showModal">Add New Location</button>
-            </div>
-		
-      
-    </div>
+         </div>
+		  
+ </div>
+ 
+  
+ 
+ <div class = "row">
+	<div class = "col-md-4">
+	<table class="table">
+    <thead>
+    <tr>
+	  <th ng-click="sort('name')">#
+		<span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+	  </th>
+      <th ng-click="sort('name')"> Location Name
+		<span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+	  </th>
+	 <!-- <th ng-click="sort('type')">Image
+		<span class="glyphicon sort-icon" ng-show="sortKey=='type'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+	  </th> -->
+     
+    </tr>
+    </thead>
+    <tbody>
 
-  <!-- Angular Grid -->
-  <!-- <div class="container" infinite-scroll="nextPage()" infinite-scroll-disabled="busy || noMoreData" infinite-scroll-distance="0.1">
-    <ul class="dynamic-grid angular-grid"
-          angular-grid="tours"
-          grid-width="275"
-          gutter-size="10"
-          angular-grid-id="gallery"
-          refresh-on-img-load="true">
-     <li data-ng-repeat="tour in tours track by $index"
-          class="grid"
-          ng-cloak>
-        <a ui-sref="look({ tourId: tour._id })"
-            class="lookLink">
-          <img ng-src="{{ tour.image }}"
-                  class="grid-img"
-                  data-actual-width="{{ (tour.image.actualWidth)}}*.8"
-                  data-actual-height="{{ (tour.image.actualHeight)}}*.8" />
-				  
-		  <div class="titleClass">
-            Tour: {{ tour.title.substr(0,50) }}
-          </div>
-          <div class="look-description-trim">
-            {{ tour.description.substr(0,80)}}
-          </div>
-          
-        </a>
-      </li>
-    </ul>
-   <div ng-show='busy'>Loading data...</div>
-  </div>-->
-</div>
+   
+
+
+    <tr ng-repeat="location in tourSpot"
+	ng-style="{
+	'background-color': $index == selectedIndex ?'Lightgray' : ''
+	}"
+		ng-click="selectLocation(location,$index)">
+	
+		<td>{{$index+1}}</td>
+       <td>{{location.title}}</td>
+	  
+	   <!--<td> 
+          <img ng-src="../..{{look.image}}" alt="Description" height ="100" width="100"/> 
+		</td> -->
+      
+     <!-- <td> <button class ="btn btn-danger" ng-click="remove(spots._id)"> Remove</button></td>
+      <td> <button class ="btn btn-warning" ng-click="edit(spots._id)"> Edit</button></td> -->
+    </tr>
+    </tbody>
+
+  </table>
+	</div>
+	<div class = "col-md-5">
+		<div class = "panel panel-default" >
+		<div class = "panel-body">
+		
+			<dt> Location Title </dt>
+			<dd> {{selectedLocation.title}}</dd>
+			<dt> Location </dt>
+			<dd> {{selectedLocation.location}}</dd>
+			<dt> Description </dt>
+			<dd> {{selectedLocation.description}}</dd>
+			<dd> 
+			 <img ng-src="../..{{selectedLocation.image}}" alt="No Image Selected" height ="350" width="400"/> 
+			</dd>
+			<dt> Location Lat </dt>
+			<dd> {{selectedLocation.xCoordinate}}</dd>
+			<dt> Location Long </dt>
+			<dd> {{selectedLocation.yCoordinate}}</dd>
+			<dt> Image URL </dt>
+			<dd> {{selectedLocation.imageSource}}</dd>
+			
+			
+			<dd> </dd>
+			<dd> </br>
+			  <td> <button class ="btn btn-danger" ng-click="remove(spots._id)"> Remove</button></td>
+			  <td> <button class ="btn btn-warning" ng-click="edit(spots._id)"> Edit</button></td> 
+			</dd>
+		</div> 
+	
+	</div>
+ </div>
+ 
+ </div> 
+ <style>
+    .header {
+        color: #36A0FF;
+        font-size: 27px;
+        padding: 10px;
+    }
+</style>

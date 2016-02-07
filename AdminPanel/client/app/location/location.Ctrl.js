@@ -12,6 +12,15 @@
     $scope.user = Auth.getCurrentUser();
     $scope.id = $stateParams.tourId;
 	$scope.tourSpot = [];
+	
+	$scope.selectedIndex = 0;
+	$scope.selectedLocation = $scope.tourSpot[0];
+	
+	$scope.selectLocation = function (spot,index){
+		$scope.selectedIndex = index;
+		$scope.selectedLocation = spot;
+	}
+	
   
 	 var alertSuccess = $alert({
       title: 'Success! ',
@@ -31,6 +40,19 @@
       duration: 8
 	 
     })
+	$scope.nextPage = function() {
+        var tourLength = $scope.tours.length;
+        if($scope.busy) {
+          return;
+        }
+        $scope.busy = true;
+        $scope.tours = $scope.tours.concat($scope.allData.splice(page * step, step));
+        page++;
+        $scope.busy = false;
+        if($scope.tours.length === 0) {
+          $scope.noMoreData = true;
+        }
+      }; //infinite scrolling page
 	
 	//getting the tour locations based on the tourID 
 	console.log("id is: " + $scope.id);

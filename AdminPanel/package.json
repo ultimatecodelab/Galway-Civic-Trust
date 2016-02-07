@@ -1,7 +1,10 @@
 {
-  "name": "BestDressed",
+  "name": "gct",
   "version": "1.0.0",
   "main": "server/app.js",
+  "scripts":{
+	"start": "node server/app.js"
+  },
   "dependencies": {
     "body-parser": "^1.13.3",
     "cheerio": "^0.19.0",
