@@ -47,7 +47,7 @@
    
 
 
-    <tr ng-repeat="location in tourSpot"
+    <tr ng-init="selectLocation(tourSpot[0],0)" ng-repeat="location in tourSpot"
 	ng-style="{
 	'background-color': $index == selectedIndex ?'Lightgray' : ''
 	}"
@@ -66,6 +66,7 @@
     </tbody>
 
   </table>
+  
 	</div>
 	<div class = "col-md-5">
 		<div class = "panel panel-default" >
@@ -78,7 +79,7 @@
 			<dt> Description </dt>
 			<dd> {{selectedLocation.description}}</dd>
 			<dd> 
-			 <img ng-src="../..{{selectedLocation.image}}" alt="No Image Selected" height ="350" width="400"/> 
+			 <img ng-src="../..{{selectedLocation.image}}" alt="No location Selected" height ="350" width="400"/> 
 			</dd>
 			<dt> Location Lat </dt>
 			<dd> {{selectedLocation.xCoordinate}}</dd>
