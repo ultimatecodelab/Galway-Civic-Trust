@@ -5,6 +5,24 @@ var express = require('express');
 var utils = require('../../utils/utils.js');
 
 
+exports.delete = function(req, res) {
+  LocationSchema.findById(req.params.id, function(err, location) {
+  console.log("The id is :" + req.params.id)
+    if(err) {
+      return handleError(res, err);
+    }
+    if(!location) {
+      return res.send(404);
+    }
+    location.remove(function(err) {
+      if(err) {
+        return handleError(res, err);
+      }
+      return res.send(200);
+    });
+  });
+};
+
 exports.locations = function(req, res) {
 //console.log("Testing...")
   var id = req.query.tourId;

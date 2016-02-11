@@ -1,5 +1,5 @@
 
- <div class="container">   
+ <div class="container" ng-init="init()">   
  
  <div id="searchFilterWrap">
         <form id="searchForm">
@@ -91,7 +91,7 @@
 			
 			<dd> </dd>
 			<dd> </br>
-			  <td> <button class ="btn btn-danger" ng-click="remove(spots._id)"> Remove</button></td>
+			  <td> <button class ="btn btn-danger" ng-click="deleteLocation(selectedLocation)"> Remove</button></td>
 			  <td> <button class ="btn btn-warning" ng-click="edit(spots._id)"> Edit</button></td> 
 			</dd>
 		</div> 

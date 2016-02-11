@@ -16,6 +16,7 @@
 	$scope.selectedIndex = 0;
 	$scope.selectedLocation = $scope.tourSpot[0];
 	
+	
 	$scope.selectLocation = function (spot,index){
 		$scope.selectedIndex = index;
 		$scope.selectedLocation = spot;
@@ -24,7 +25,7 @@
   
 	 var alertSuccess = $alert({
       title: 'Success! ',
-      content: 'New Tour added',
+      content: 'New Location added',
       placement: 'top-right',
       container: '#alertContainer',
       type: 'success',
@@ -33,7 +34,7 @@
 
     var alertFail = $alert({
       title: 'Not saved',
-      content: 'New Tour failed to save',
+      content: 'New Location failed to save',
       placement: 'top-right',
       container: '#alertContainer',
       type: 'warning',
@@ -56,14 +57,31 @@
 	
 	//getting the tour locations based on the tourID 
 	console.log("id is: " + $scope.id);
-	toursAPI.getLocationsOfThisCategory($scope.id)
-      .then(function(data) {
-        console.log(data);
-        $scope.tourSpot = data.data;
-      })
-      .catch(function(err) {
-        console.log('failed to get looks for user ' + err);
-      });
+	
+	$scope.init = function (){
+		toursAPI.getLocationsOfThisCategory($scope.id)
+		  .then(function(data) {
+			console.log(data);
+			$scope.tourSpot = data.data;
+		  })
+		  .catch(function(err) {
+			console.log('failed to get looks for user ' + err);
+		  });
+	  }
+	  
+	  //deleting the specific location from the API
+	  $scope.deleteLocation = function(location) {
+	    var index = $scope.tourSpot.indexOf(location); //updating the array
+      toursAPI.deleteLocation(location)
+        .then(function(data) {
+          console.log('success, location deleted');
+         $scope.tourSpot.splice(index, 1);
+		 $scope.selectedLocation = $scope.tourSpot[0];
+        })
+        .catch(function(err) {
+          console.log('failed to delete location' + err);
+        });
+    }
 	  
 	$scope.uploadPic = function(file) {
 	console.log($scope.tour);
@@ -94,17 +112,14 @@
 		$scope.tourSpot.location = ' ' ;
         $scope.tourSpot = '';
         $scope.picPreview = false;
-	
        
       }, function(resp) {
-	  
         alertFail.show();
       }, function(evt) {
         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
         console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
       });
     }//uploadtours
+	//toursAPI.getLocationsOfThisCategory($scope.id);
 	}
-
-  
 })();

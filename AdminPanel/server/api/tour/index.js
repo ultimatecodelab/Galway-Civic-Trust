@@ -37,4 +37,6 @@ router.get('/getAllTours', controller.allTours);
 
 router.get('/getAllToursJson',basicAuthentication, controller.allTours);
 
+router.delete('/:id',auth.isAuthenticated(), tourLocationController.delete);
+
 module.exports = router;
