@@ -92,7 +92,12 @@
 			<dd> </dd>
 			<dd> </br>
 			  <td> <button class ="btn btn-danger" ng-click="deleteLocation(selectedLocation)"> Remove</button></td>
-			  <td> <button class ="btn btn-warning" ng-click="edit(spots._id)"> Edit</button></td> 
+			  <!--<td> <button class ="btn btn-warning" ng-click="edit(spots._id)"> Edit</button></td> -->
+			  <td><button class="btn btn-primary"
+                      data-animation="am-fade-and-scale"
+                      data-placement="center"
+                      data-template-url="app/location/editLocations.html"
+                      bs-modal="showModal">Edit Details</button><td>
 			</dd>
 		</div> 
 	

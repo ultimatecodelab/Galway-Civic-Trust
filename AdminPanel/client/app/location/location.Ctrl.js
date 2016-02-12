@@ -15,11 +15,13 @@
 	
 	$scope.selectedIndex = 0;
 	$scope.selectedLocation = $scope.tourSpot[0];
+	//$scope.editLocation = $scope.tourSpot[0];
 	
-	
+
 	$scope.selectLocation = function (spot,index){
 		$scope.selectedIndex = index;
 		$scope.selectedLocation = spot;
+		//$scope.editLocation = $scope.tourSpot[index];
 	}
 	
   
