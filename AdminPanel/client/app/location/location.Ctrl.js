@@ -12,12 +12,22 @@
     $scope.user = Auth.getCurrentUser();
     $scope.id = $stateParams.tourId;
 	$scope.tourSpot = [];
+	$scope.editLocation = {};
 	
 	$scope.selectedIndex = 0;
 	$scope.selectedLocation = $scope.tourSpot[0];
 	//$scope.editLocation = $scope.tourSpot[0];
 	
-
+	//editing the location PUT request will be sent to our API
+	$scope.editLocation = function(location){
+		toursAPI.getLocationDetails(location)
+		.then(function(data){
+		console.log(data);
+		$scope.editLocation = data.data;
+		}).catch(function(err){
+		console.log("failed to retrive the location information");
+		});
+	}
 	$scope.selectLocation = function (spot,index){
 		$scope.selectedIndex = index;
 		$scope.selectedLocation = spot;
