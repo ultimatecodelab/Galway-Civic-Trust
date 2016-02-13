@@ -16,23 +16,40 @@
 	
 	$scope.selectedIndex = 0;
 	$scope.selectedLocation = $scope.tourSpot[0];
-	//$scope.editLocation = $scope.tourSpot[0];
+	$scope.selectedIndex = $scope.tourSpot[0];
+	$scope.editLocation2 = null;
 	
-	//editing the location PUT request will be sent to our API
-	$scope.editLocation = function(location){
-		toursAPI.getLocationDetails(location)
-		.then(function(data){
-		console.log(data);
-		$scope.editLocation = data.data;
-		}).catch(function(err){
-		console.log("failed to retrive the location information");
-		});
-	}
 	$scope.selectLocation = function (spot,index){
 		$scope.selectedIndex = index;
 		$scope.selectedLocation = spot;
-		//$scope.editLocation = $scope.tourSpot[index];
+		
+		$scope.editLocation = function(location) {
+		console.log("passed this shit: " + location._id);
+		toursAPI.getUpdateLocation(location)
+        .then(function(data) {
+		//console.log("new Data");
+          console.log(data);
+          $scope.editLocation = data.data;
+        })
+        .catch(function(err) {
+          console.log('failed to edit location ' + err);
+        });
+		}
+		//$scope.editLocation(spot);
 	}
+	
+	/*$scope.editLocation = function(location) {
+	console.log("passed this shit: " + location._id);
+      toursAPI.getUpdateLocation(location)
+        .then(function(data) {
+		//console.log("new Data");
+          console.log(data);
+          $scope.editLocation = data.data;
+        })
+        .catch(function(err) {
+          console.log('failed to edit location ' + err);
+        });
+    }*/
 	
   
 	 var alertSuccess = $alert({
@@ -94,6 +111,9 @@
           console.log('failed to delete location' + err);
         });
     }
+	
+	//getting the details of specific location
+	 
 	  
 	$scope.uploadPic = function(file) {
 	console.log($scope.tour);
