@@ -11,7 +11,8 @@
       return {
         getAllTours: getAllTours,
 		getLocationsOfThisCategory: getLocationsOfThisCategory,
-		deleteLocation: deleteLocation
+		deleteLocation: deleteLocation,
+		getUpdateLocation:getUpdateLocation
 		 //getUserTours: getUserTours
       }
 	//deleting the specific location from the database...
@@ -23,6 +24,11 @@
         return $http.get('/api/tour/getAllTours', {
           cache: true
         });
+      }
+	  //getting the details of the specific location
+	  function getUpdateLocation(location) {
+	  console.log("Passing " + location._id);
+        return $http.get('/api/tour/' + location._id);
       }
 
 	function getLocationsOfThisCategory(id) {
