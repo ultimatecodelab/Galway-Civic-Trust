@@ -23,6 +23,18 @@ exports.delete = function(req, res) {
   });
 };
 
+exports.singleLocation = function(req, res) {
+  LocationSchema.findById(req.params.locationId, function(err, location) {
+    if(err) {
+      return handleError(res, err);
+    }
+    if(!location) {
+      return res.send(404);
+    }
+    return res.json(location);
+  });
+};
+
 exports.locations = function(req, res) {
 //console.log("Testing...")
   var id = req.query.tourId;
