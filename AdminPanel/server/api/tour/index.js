@@ -32,6 +32,8 @@ router.post('/upload', auth.isAuthenticated(), controller.upload);
 router.post('/uploadLocation', auth.isAuthenticated(), tourLocationController.upload);
 router.get('/getLocations', tourLocationController.locations);
 
+//update
+router.put('/:id', auth.isAuthenticated(), tourLocationController.update);
 
 router.get('/getAllTours', controller.allTours);
 //get the location details (single location)
