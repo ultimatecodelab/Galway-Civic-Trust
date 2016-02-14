@@ -34,7 +34,8 @@ router.get('/getLocations', tourLocationController.locations);
 
 
 router.get('/getAllTours', controller.allTours);
-
+//get the location details (single location)
+router.get('/:locationId', tourLocationController.singleLocation);
 router.get('/getAllToursJson',basicAuthentication, controller.allTours);
 
 router.delete('/:id',auth.isAuthenticated(), tourLocationController.delete);
