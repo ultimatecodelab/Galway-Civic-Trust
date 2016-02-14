@@ -70,13 +70,13 @@
                 <input type="text"
                           class="form-control"
                           placeholder="Enter Location"
-                          ng-model="selectedLocation.location" required /><i ng-show="myForm.title.$error.required">*required</i>
+                          ng-model="editLocation.location" required /><i ng-show="myForm.title.$error.required">*required</i>
               </div>
                  <div class="form-group">
                     <textarea class="form-control"
                               placeholder="Description"
                               rows="3"
-                              ng-model="selectedLocation.description" required />
+                              ng-model="editLocation.description" required />
                               <i ng-show="myForm.description.$error.required">*required</i>
                             </textarea>
                       </div>
@@ -84,19 +84,19 @@
                 <input type="text"
                           class="form-control"
                           placeholder="Exact XCoordinate(if known)"
-                          ng-model="selectedLocation.xCoordinate" required /><i ng-show="myForm.title.$error.required">*required</i>
+                          ng-model="editLocation.xCoordinate" required /><i ng-show="myForm.title.$error.required">*required</i>
               </div>
 			  <div class="form-group">
                 <input type="text"
                           class="form-control"
                           placeholder="Exact yCoordinate(if known)"
-                          ng-model="selectedLocation.yCoordinate" required /><i ng-show="myForm.title.$error.required">*required</i>
+                          ng-model="editLocation.yCoordinate" required /><i ng-show="myForm.title.$error.required">*required</i>
               </div>
 			  <div class="form-group">
                 <input type="text"
                           class="form-control"
                           placeholder="Image Source (URL)"
-                          ng-model="selectedLocation.imageSource" required /><i ng-show="myForm.title.$error.required">*required</i>
+                          ng-model="editLocation.imageSource" required /><i ng-show="myForm.title.$error.required">*required</i>
               </div>
               <div class="controls">
                 <input class="bottom-marg-15"
@@ -119,7 +119,7 @@
                 <button id="loadButton"
                             ng-disabled="!myForm.$valid"
                             class="btn btn-primary btn-lg"
-                            ng-click="saveLocation()">Save Details</button>
+                            ng-click="editLocation(selectedLocation)">Save Details</button>
 
                 <div class="col-md-6" id="alertContainer"></div>
                 <img ngf-src="picFile"
@@ -143,4 +143,5 @@
       </div>
     </div>
   </div> 
+  
   
