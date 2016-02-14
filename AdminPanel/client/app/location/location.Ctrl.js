@@ -50,7 +50,22 @@
           console.log('failed to edit location ' + err);
         });
     }*/
-	
+	$scope.saveLocation = function() {
+      var location = $scope.editLocation;
+
+      toursAPI.updateLook(location)
+        .then(function(data) {
+          console.log('Location updated');
+          console.log(data);
+          $scope.editLocation.title = '';
+          $scope.editLocation.description = '';
+          alertSuccess.show();
+        })
+        .catch(function(err) {
+          console.log('failed to update' + err);
+          alertFail.show();
+        });
+    }
   
 	 var alertSuccess = $alert({
       title: 'Success! ',
