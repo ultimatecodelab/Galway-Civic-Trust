@@ -40,6 +40,7 @@
 	 <!-- <th ng-click="sort('type')">Image
 		<span class="glyphicon sort-icon" ng-show="sortKey=='type'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
 	  </th> -->
+
      
     </tr>
     </thead>
@@ -56,6 +57,12 @@
 	
 		<td>{{$index+1}}</td>
        <td>{{location.title}}</td>
+	   <td> <button class ="btn btn-danger" ng-click="deleteLocation(selectedLocation)"> Remove</button> </td>
+	   <td><button class="btn btn-primary"  ng-click="editLocation(location)"
+                      data-animation="am-fade-and-scale"
+                      data-placement="center"
+                      data-template-url="app/location/editLocations.html"
+                      bs-modal="showModal">Edit</button><td>
     </tr>
     </tbody>
 
@@ -82,19 +89,8 @@
 			<dt> Image URL </dt>
 			<dd> {{selectedLocation.imageSource}}</dd>
 			
-			
 			<dd> </dd>
-			<dd> </br>
-			  <td> <button class ="btn btn-danger" ng-click="deleteLocation(selectedLocation)"> Remove</button></td>
-			  <!--<td> <button class ="btn btn-warning" ng-click="edit(spots._id)"> Edit</button></td> -->
-			  <td><button class="btn btn-primary"  ng-click="editLocation(tourSpot[selectedIndex])"
-                      data-animation="am-fade-and-scale"
-                      data-placement="center"
-                      data-template-url="app/location/editLocations.html"
-					 
-                      bs-modal="showModal">Edit Details</button><td>
-					  
-			</dd>
+			<dd> </br> </dd>
 		</div> 
 	
 	</div>

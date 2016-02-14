@@ -23,35 +23,37 @@
 		$scope.selectedIndex = index;
 		$scope.selectedLocation = spot;
 		
-		$scope.editLocation = function(location) {
-		console.log("passed this shit: " + location._id);
-		toursAPI.getUpdateLocation(location)
-        .then(function(data) {
-		//console.log("new Data");
-          console.log(data);
-          $scope.editLocation = data.data;
-        })
-        .catch(function(err) {
-          console.log('failed to edit location ' + err);
-        });
+		/*$scope.editLocation = function(location) {
+			console.log("passed this shit: " + location._id);
+			toursAPI.getUpdateLocation(location)
+			.then(function(data) {
+			//console.log("new Data");
+			  console.log(data);
+			  $scope.editLocation = data.data;
+			})
+			.catch(function(err) {
+			  console.log('failed to edit location ' + err);
+			});
 		}
-		//$scope.editLocation(spot);
+		//$scope.editLocation(spot); */
 	}
 	
-	/*$scope.editLocation = function(location) {
-	console.log("passed this shit: " + location._id);
-      toursAPI.getUpdateLocation(location)
-        .then(function(data) {
-		//console.log("new Data");
-          console.log(data);
-          $scope.editLocation = data.data;
-        })
-        .catch(function(err) {
-          console.log('failed to edit location ' + err);
-        });
-    }*/
+	$scope.editLocation = function(location) {
+			console.log("passed this shit: " + location._id);
+			toursAPI.getUpdateLocation(location)
+			.then(function(data) {
+			//console.log("new Data");
+			  console.log(data);
+			  $scope.editLocation = data.data;
+			})
+			.catch(function(err) {
+			  console.log('failed to edit location ' + err);
+			});
+		}
+    }
 	$scope.saveLocation = function() {
-      var location = $scope.editLocation;
+		console.log("came here..")
+      var location = $scope.editLocation();
 
       toursAPI.updateLook(location)
         .then(function(data) {
