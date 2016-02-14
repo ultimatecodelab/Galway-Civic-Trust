@@ -5,6 +5,29 @@ var express = require('express');
 var utils = require('../../utils/utils.js');
 
 
+//updating the Location
+exports.update = function(req, res) {
+  if(req.body._id) {
+    delete req.body._id;
+  }
+  LocationSchema.findById(req.params.id, function(err, location) {
+    if(err) {
+      return handleError(res, err);
+      }
+      if(!location) {
+        return res.send(404);
+      }
+      var updated = _.merge(location, req.body);
+      updated.save(function(err) {
+        if(err) {
+          return handleError(res, err);
+        }
+        console.log(location);
+        return res.json(location);
+      });
+  });
+};
+
 exports.delete = function(req, res) {
   LocationSchema.findById(req.params.id, function(err, location) {
   console.log("The id is :" + req.params.id)
