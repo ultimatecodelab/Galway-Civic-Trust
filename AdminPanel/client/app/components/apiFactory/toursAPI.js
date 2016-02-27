@@ -12,6 +12,7 @@
         getAllTours: getAllTours,
 		getLocationsOfThisCategory: getLocationsOfThisCategory,
 		deleteLocation: deleteLocation,
+		deleteTour: deleteTour,
 		getUpdateLocation:getUpdateLocation,
 		updateLocation:updateLocation
 		 //getUserTours: getUserTours
@@ -23,6 +24,9 @@
 	//deleting the specific location from the database...
 	 function deleteLocation(location) {
         return $http.delete('/api/tour/' + location._id);
+      }
+	  function deleteTour(tour) {
+        return $http.delete('/api/tour/deleteTour/' + tour._id);
       }
 
       function getAllTours() {

@@ -17,18 +17,13 @@
 	
 	//---------------init---------------
 	$scope.tour.title = "Arjun";
-	/*$scope.tour.location = "Galway";
-	$scope.tour.description = "Description";
-	$scope.tour.xCoordinate = "4343";
-	$scope.tour.yCoordinate = "4343";
-	$scope.tour.imageSource = "No source";*/
 
     //$scope.busy = true;
     $scope.allData = [];
 	$scope.allTours = [];
     var page = 0;
     var step = 3;
-
+	
     var alertSuccess = $alert({
       title: 'Success! ',
       content: 'New Tour added',
@@ -47,6 +42,21 @@
       duration: 8
 	 
     })
+	
+	 $scope.deleteTour = function(tour) {
+	    //var index = $scope.tours.indexOf(tour); //updating the array
+		console.log(tour._id);
+		toursAPI.deleteTour(tour)
+        .then(function(data) {
+          console.log('success, location deleted');
+        // $scope.tours.splice(index, 1);
+		// $scope.selectedTour = $scope.tourSpot[0];
+        })
+        .catch(function(err) {
+          console.log('failed to delete location' + err);
+        });
+		toursAPI.getAllTours();
+	}
 
 	toursAPI.getAllTours()
       .then(function(data) {
@@ -96,14 +106,6 @@
         data: {
           file: file,
           title: $scope.tour.title,
-		  /*
-		  location: $scope.tour.location,
-          description: $scope.tour.description,
-		  xCoordinate : $scope.tour.xCoordinate,
-		  yCoordinate : $scope.tour.yCoordinate,
-		  imageSource: $scope.tour.imageSource,*/
-		  
-		  
           email: $scope.user.email,
           name: $scope.user.name,
           _creator: $scope.user._id
@@ -112,11 +114,6 @@
 		alertSuccess.show();
         console.log('success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
         $scope.tour.title = '';
-        /*$scope.tour.description = '';
-		$scope.tour.xCoordinate = ' ' ;
-		$scope.tour.yCoordinate = ' ' ;
-		$scope.tour.imageSource = ' ' ;
-		$scope.tour.location = ' ' ;*/
         $scope.picFile = '';
         $scope.picPreview = false;
 	
