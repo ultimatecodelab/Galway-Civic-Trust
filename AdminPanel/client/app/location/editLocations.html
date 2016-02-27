@@ -51,7 +51,7 @@
       </div>
     </div>
 
-    <form name="myForm"
+    <form name="editForm"
               enctype="multipart/form-data"
               >
       <div class="row row-centered">
@@ -64,39 +64,39 @@
              <div class="form-group">
                 <input type="text"
                           class="form-control"
-                          placeholder="Location Title"  ng-model="editLocation.title" required /><i ng-show="myForm.title.$error.required">*required</i>
+                          placeholder="Location Title"  ng-model="editLocation.title" required /><i ng-show="editForm.title.$error.required">*required</i>
               </div>
 			  <div class="form-group">
                 <input type="text"
                           class="form-control"
                           placeholder="Enter Location"
-                          ng-model="editLocation.location" required /><i ng-show="myForm.title.$error.required">*required</i>
+                          ng-model="editLocation.location" required /><i ng-show="editForm.title.$error.required">*required</i>
               </div>
                  <div class="form-group">
                     <textarea class="form-control"
                               placeholder="Description"
                               rows="3"
                               ng-model="editLocation.description" required />
-                              <i ng-show="myForm.description.$error.required">*required</i>
+                              <i ng-show="editForm.description.$error.required">*required</i>
                             </textarea>
                       </div>
 			<div class="form-group">
                 <input type="text"
                           class="form-control"
                           placeholder="Exact XCoordinate(if known)"
-                          ng-model="editLocation.xCoordinate" required /><i ng-show="myForm.title.$error.required">*required</i>
+                          ng-model="editLocation.xCoordinate" required /><i ng-show="editForm.title.$error.required">*required</i>
               </div>
 			  <div class="form-group">
                 <input type="text"
                           class="form-control"
                           placeholder="Exact yCoordinate(if known)"
-                          ng-model="editLocation.yCoordinate" required /><i ng-show="myForm.title.$error.required">*required</i>
+                          ng-model="editLocation.yCoordinate" required /><i ng-show="editForm.title.$error.required">*required</i>
               </div>
 			  <div class="form-group">
                 <input type="text"
                           class="form-control"
                           placeholder="Image Source (URL)"
-                          ng-model="editLocation.imageSource" required /><i ng-show="myForm.title.$error.required">*required</i>
+                          ng-model="editLocation.imageSource" required /><i ng-show="editForm.title.$error.required">*required</i>
               </div>
               <div class="controls">
                 <input class="bottom-marg-15"
@@ -110,16 +110,16 @@
                   <div style="width:{{picFile.progress}}%" ng-bind="picFile.progress + '%'" class="ng-binding"></div>
                </span>
 
-                <i ng-show="myForm.file.$error.maxSize">File too large
+                <i ng-show="editForm.file.$error.maxSize">File too large
                 {{picFile.size / 1000000|number:1}}MB: max {{picFile.$errorParam}}</i>
-                <img ng-show="myForm.file.$valid"
+                <img ng-show="editForm.file.$valid"
                         ngf-src="!picFile.$error && picFile"
                         class="img-thumbnail img-responsive">
 
                 <button id="loadButton"
-                            ng-disabled="!myForm.$valid"
+                            ng-disabled="!editForm.$valid"
                             class="btn btn-primary btn-lg"
-                            ng-click="editLocation(selectedLocation)">Save Details</button>
+                            ng-click="saveLocation()">Save Details</button>
 
                 <div class="col-md-6" id="alertContainer"></div>
                 <img ngf-src="picFile"

@@ -46,8 +46,6 @@
     </thead>
     <tbody>
 
-   
-
 
     <tr ng-init="selectLocation(tourSpot[0],0)" ng-repeat="location in tourSpot"
 	ng-style="{
@@ -57,12 +55,12 @@
 	
 		<td>{{$index+1}}</td>
        <td>{{location.title}}</td>
-	   <td> <button class ="btn btn-danger" ng-click="deleteLocation(selectedLocation)"> Remove</button> </td>
+	   <!--<td> <button class ="btn btn-danger" ng-click="deleteLocation(location)"> Remove</button> </td>
 	   <td><button class="btn btn-primary"  ng-click="editLocation(location)"
                       data-animation="am-fade-and-scale"
                       data-placement="center"
                       data-template-url="app/location/editLocations.html"
-                      bs-modal="showModal">Edit</button><td>
+                      bs-modal="showModal">Edit</button><td> -->
     </tr>
     </tbody>
 
@@ -89,7 +87,14 @@
 			<dt> Image URL </dt>
 			<dd> {{selectedLocation.imageSource}}</dd>
 			
-			<dd> </dd>
+			
+			<dd> <td> <button class ="btn btn-danger" ng-click="deleteLocation(selectedLocation)"> Remove</button> </td>
+		   <td><button class="btn btn-primary"  ng-click="editLocation(selectedLocation)"
+						  data-animation="am-fade-and-scale"
+						  data-placement="center"
+						  data-template-url="app/location/editLocations.html"
+						  bs-modal="showModal">Edit</button><td> 
+			</dd>
 			<dd> </br> </dd>
 		</div> 
 	

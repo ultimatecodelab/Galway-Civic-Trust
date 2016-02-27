@@ -18,54 +18,44 @@
 	$scope.selectedLocation = $scope.tourSpot[0];
 	$scope.selectedIndex = $scope.tourSpot[0];
 	$scope.editLocation2 = null;
+	$scope.updatedlocation = null;
 	
 	$scope.selectLocation = function (spot,index){
 		$scope.selectedIndex = index;
 		$scope.selectedLocation = spot;
 		
-		/*$scope.editLocation = function(location) {
+		$scope.editLocation = function(location) {
 		console.log("passed this shit: " + location._id);
 		toursAPI.getUpdateLocation(location)
         .then(function(data) {
 		//console.log("new Data");
           console.log(data);
           $scope.editLocation = data.data;
+		  $scope.updatedlocation = $scope.editLocation;
         })
         .catch(function(err) {
           console.log('failed to edit location ' + err);
         });
-		}*/
-		//$scope.editLocation(spot);
+		}
 	}
-	
-	$scope.editLocation = function(location) {
-	console.log("passed this shit: " + location._id);
-      toursAPI.getUpdateLocation(location)
-        .then(function(data) {
-		//console.log("new Data");
-          console.log(data);
-          $scope.editLocation = data.data;
-        })
-        .catch(function(err) {
-          console.log('failed to edit location ' + err);
-        });
-    }
 	$scope.saveLocation = function() {
+	  console.log("here.....................")
       var location = $scope.editLocation;
 
-      toursAPI.updateLook(location)
+      toursAPI.updateLocation(location)
         .then(function(data) {
           console.log('Location updated');
           console.log(data);
-          $scope.editLocation.title = '';
-          $scope.editLocation.description = '';
+          /*$scope.editLocation.title = '';
+          $scope.editLocation.description = '';*/
           alertSuccess.show();
         })
         .catch(function(err) {
           console.log('failed to update' + err);
           alertFail.show();
         });
-    }
+		
+    }//save location
   
 	 var alertSuccess = $alert({
       title: 'Success! ',
@@ -103,15 +93,15 @@
 	console.log("id is: " + $scope.id);
 	
 	$scope.init = function (){
-		toursAPI.getLocationsOfThisCategory($scope.id)
-		  .then(function(data) {
-			console.log(data);
-			$scope.tourSpot = data.data;
-		  })
-		  .catch(function(err) {
-			console.log('failed to get looks for user ' + err);
-		  });
-	  }
+	toursAPI.getLocationsOfThisCategory($scope.id)
+	  .then(function(data) {
+		console.log(data);
+		$scope.tourSpot = data.data;
+	  })
+	  .catch(function(err) {
+		console.log('failed to get looks for user ' + err);
+	  });
+	 }
 	  
 	  //deleting the specific location from the API
 	  $scope.deleteLocation = function(location) {
@@ -127,9 +117,6 @@
         });
     }
 	
-	//getting the details of specific location
-	 
-	  
 	$scope.uploadPic = function(file) {
 	console.log($scope.tour);
       Upload.upload({
@@ -166,7 +153,6 @@
         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
         console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
       });
-    }//uploadtours
-	//toursAPI.getLocationsOfThisCategory($scope.id);
+     }//uploadtours
 	}
 })();
