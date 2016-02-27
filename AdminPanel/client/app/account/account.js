@@ -32,9 +32,9 @@
         authenticate: true
       })
       .state('profile', {
-        url: '/profile',
-        templateUrl: 'app/account/profile/profile.html',
-        controller: 'ProfileCtrl',
+		url: '/settings',
+        templateUrl: 'app/account/settings/settings.html',
+        controller: 'SettingsCtrl',
         authenticate: true
       });
     }
