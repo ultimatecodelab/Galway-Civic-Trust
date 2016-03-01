@@ -11,6 +11,7 @@
     $scope.users = [];
     $scope.user = {}; 
     $scope.deleteBtn = true;
+	$scope.tours = [];
 	/*
 		gelAllUsers() and deleteUser() methods are implemented in adminAPI . adminAPI is like a factory that 
 		contains the necessary methods for managing users.
@@ -24,7 +25,7 @@
       .catch(function(err) {
         console.log('error getting users');
         console.log(err);
-      });
+     });//end of get All Users
 	//deleting the user
     $scope.deleteUser = function(user) {
       adminAPI.deleteUser(user)
@@ -37,6 +38,14 @@
           console.log('failed to delete user');
           console.log(err);
         });
-    }
+    }//end of delete usr
+	toursAPI.getAllTours()		
+     .then(function(data) {		
+     console.log(data);		
+     $scope.tours = data.data;		
+    })		
+	.catch(function(err) {		
+     console.log('failed to retrieve tours');		
+    })
   }
 })();
