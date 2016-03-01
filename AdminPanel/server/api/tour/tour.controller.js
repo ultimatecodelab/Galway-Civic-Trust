@@ -7,6 +7,23 @@ var express = require('express');
 var utils = require('../../utils/utils.js');
 
 
+exports.delete = function(req, res) {
+  Tour.findById(req.params.id, function(err, tour) {
+  console.log("The id is :" + req.params.id)
+    if(err) {
+      return handleError(res, err);
+    }
+    if(!location) {
+      return res.send(404);
+    }
+    tour.remove(function(err) {
+      if(err) {
+        return handleError(res, err);
+      }
+      return res.send(200);
+    });
+  });
+};
 exports.allTours = function(req, res) {
   Tour.find({})
     .sort({
