@@ -5,12 +5,11 @@ The objective of this project is to continue the development of cross platform W
 
 For this project our task is to create an app for the remaining tours that the Galway Civic Trust has and give them the means to update, edit, delete and create new tours without the need of developers. We are planning to create an admin site for this purpose.
 
-
 ##Technologies
 ####MongoDb
 ####Express
 ####Angularjs
 ####Nodejs
-
+﻿![Alt text](https://github.com/ultimatecodelab/Galway-Civic-Trust/blob/master/architectureDiagram.PNG "Optional title")
 
 ##File Structure
