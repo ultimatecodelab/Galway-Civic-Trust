@@ -9,8 +9,12 @@
 
   function AdminCtrl($scope, Auth, $modal, adminAPI, $alert, toursAPI) {
     $scope.users = [];
-    $scope.user = {};
+    $scope.user = {}; 
     $scope.deleteBtn = true;
+	/*
+		gelAllUsers() and deleteUser() methods are implemented in adminAPI . adminAPI is like a factory that 
+		contains the necessary methods for managing users.
+	*/
 	
 	//displays all the users of the system
     adminAPI.getAllUsers()
