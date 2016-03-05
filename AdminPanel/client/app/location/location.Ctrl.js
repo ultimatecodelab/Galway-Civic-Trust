@@ -20,7 +20,20 @@
 	$scope.editLocation2 = null;
 	$scope.updatedlocation = null;
 	
-	
+	//retriving all the locations. Admin will be able to select the 
+	//existing location and map with a new tour...
+	$scope.locations=[]; //holds all the locations
+	toursAPI.getAllLocations()
+      .then(function(data) {
+        console.log(data);
+        $scope.locations = data.data;
+		console.log($scope.locations);
+		console.log("the title is: " + $scope.locations[0].title);
+      })
+      .catch(function(err) {
+        console.log('failed to get locations ' + err);
+      });
+	  
 	//getting tours from the toursAPI
 	$scope.tours = [];
 	 toursAPI.getAllTours()
