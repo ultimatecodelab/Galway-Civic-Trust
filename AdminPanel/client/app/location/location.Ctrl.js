@@ -20,6 +20,19 @@
 	$scope.editLocation2 = null;
 	$scope.updatedlocation = null;
 	
+	
+	//getting tours from the toursAPI
+	$scope.tours = [];
+	 toursAPI.getAllTours()
+      .then(function(data) {
+        console.log('TOURS found ');
+        console.log(data);
+        $scope.tours = data.data;
+      })
+      .catch(function(err) {
+        console.log('failed to get tours ' + err);
+      });
+	  
 	$scope.selectLocation = function (spot,index){
 		$scope.selectedIndex = index;
 		$scope.selectedLocation = spot;
