@@ -10,15 +10,25 @@
     function toursAPI($http) {
       return {
         getAllTours: getAllTours,
+		getAllLocations: getAllLocations,
 		getLocationsOfThisCategory: getLocationsOfThisCategory,
 		deleteLocation: deleteLocation,
 		deleteTour: deleteTour,
 		getUpdateLocation:getUpdateLocation,
-		updateLocation:updateLocation
-		 //getUserTours: getUserTours
+		updateLocation:updateLocation,
+		linkExistingLocation:linkExistingLocation,
+		unlinkLocation:unlinkLocation
       }
 	  
-	   function updateLocation(location) {
+	  //unlinking the location
+	   function unlinkLocation(locAndTour){
+		return $http.put('/api/tour/unlinkLocation/' + locAndTour.locationID,locAndTour);
+	  }
+	  //linking the location
+	  function linkExistingLocation(locAndTour){
+		return $http.put('/api/tour/linkLocation/' + locAndTour.locationID,locAndTour);
+	  }
+	  function updateLocation(location) {
         return $http.put('/api/tour/' + location._id, location);
       }
 	//deleting the specific location from the database...
@@ -31,6 +41,12 @@
 
       function getAllTours() {
         return $http.get('/api/tour/getAllTours', {
+          cache: true
+        });
+      }
+	  
+	  function getAllLocations() {
+        return $http.get('/api/tour/getAllLocations', {
           cache: true
         });
       }
