@@ -5,33 +5,6 @@ var express = require('express');
 var utils = require('../../utils/utils.js');
 
 
-exports.unlinkTour = function(req, res) {
-	console.log("Printing..................." + req.body.TourID)
-	LocationSchema.findById(req.params.id, function(err, location) {
-		if(err) {
-			return handleError(res, err);
-		}
-		if(!location) {
-		 console.log('failed... ')
-		  return res.send(404);
-		}
-		
-		if(req.body.TourID){
-			location.tourIdArr.pull(req.body.TourID);
-			location.sharedCounter-=1;
-			location.save(function(err) {
-			if(err) {
-
-			  return handleError(res, err);
-			}
-			console.log(location);
-			return res.json(location);
-		  });//end of save*/
-	  }//end of if
-	});//end of findby
-	
- };
- 
 exports.linkTour = function(req, res) {
 
 	console.log("Printing..................." + req.body.TourID)
@@ -59,7 +32,52 @@ exports.linkTour = function(req, res) {
 	});//end of findby
 	
  };
+ //unlink Tour-------------------->>>>>
+ exports.unlinkTour = function(req, res) {
+	console.log("Printing..................." + req.body.TourID)
+	LocationSchema.findById(req.params.id, function(err, location) {
+		if(err) {
+			return handleError(res, err);
+		}
+		if(!location) {
+		 console.log('failed... ')
+		  return res.send(404);
+		}
+		
+		if(req.body.TourID){
+			location.tourIdArr.pull(req.body.TourID);
+			location.sharedCounter-=1;
+			location.save(function(err) {
+			if(err) {
 
+			  return handleError(res, err);
+			}
+			console.log(location);
+			return res.json(location);
+		  });//end of save*/
+	  }//end of if
+	});//end of findby
+	
+ };
+ 
+exports.allLocations = function(req, res) {
+  LocationSchema
+  .find({})
+    .sort({
+      createTime: -1
+    })
+    .exec(function(err, looks) {
+      if (err) {
+        return handleError(res, err);
+      }
+      if (!looks) {
+        return res.send(404);
+      }
+      console.log(looks);
+      return res.status(200)
+                     .json(looks);
+    });
+};
 //updating the Location
 exports.update = function(req, res) {
   if(req.body._id) {
@@ -90,6 +108,8 @@ exports.upload = function(req, res) {
   newLocation.image = '/assets/images/uploads/' + fileimage;
 
   newLocation.title = req.body.title;
+  newLocation.tourIdArr.push(req.body.tourId)
+  newLocation.sharedCounter = 1;
   newLocation.description = req.body.description;
   newLocation.location = req.body.location;
   newLocation.xCoordinate = req.body.xCoordinate;
@@ -102,7 +122,7 @@ exports.upload = function(req, res) {
 
   newLocation.save(function(err, look) {
     if(err) {
-      console.log('error saving look');
+      console.log('error saving location');
       return res.send(500);
     } else {
       console.log(look);
@@ -121,6 +141,9 @@ exports.delete = function(req, res) {
     if(!location) {
       return res.send(404);
     }
+	//if()
+	//var index = location.tourIdArr.indexOf(req.params.id);
+	//array.splice(index, 1);
     location.remove(function(err) {
       if(err) {
         return handleError(res, err);
@@ -142,13 +165,17 @@ exports.singleLocation = function(req, res) {
   });
 };
 
+//one of the important function...
 exports.locations = function(req, res) {
 //console.log("Testing...")
   var id = req.query.tourId;
+  //algorithm
+  //loop through the collections
   console.log("ID passed as parameter: " + id);
+  
   LocationSchema.find({
-    tourId: {
-      $in: req.query.tourId
+    tourIdArr: {
+      $in: [req.query.tourId]
     }
   })
   .sort({
