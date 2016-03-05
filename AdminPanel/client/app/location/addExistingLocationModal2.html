@@ -1,0 +1,92 @@
+<div class="modal" tabindex="-1" role="dialog" ng-init="getAllLocations()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+		<div class="modal-header" ng-show="title">
+			<button type="button"
+				class="close"
+				ng-click="$hide()"><i class="fa fa-times"></i>
+			</button>
+			<h4 class="modal-title">Add New Tour</h4>
+		</div>
+  <div class="modal-body"
+          ng-show="showUploadForm()">
+      <div class="spinner"
+             ng-show="loading">
+        <img src="assets/images/spinner.gif">
+      </div>
+
+    <div class="col-md-6" id="alertContainer"></div>
+
+  <div class="listing-details">
+        <div class="form-group">
+          <div class="row listing-description-row">
+				<label for="description"
+					class="col-xs-12">Description
+				</label>
+			</div>
+				<textarea class="form-control"
+				   rows="3"
+				   ng-model="tour.description">
+				</textarea>
+            </div>
+           <div class="form-group">
+             <div class="listing-image">
+                <img src="{{tour.imgThumb}}"
+                        class="img-thumbnail img-responsive">
+              </div>
+             </div>
+      <button type="submit"
+                  class="btn btn-primary">Submit</button>
+      <button type="button"
+                  class="btn btn-default"
+                  ng-click="$hide()">Cancel</button>
+      </div>
+    </div>
+  
+
+    <div class="modal-body">
+      <h3>Select from existing tour</h3>
+	 <div>
+	<label>Search</label>
+	<br>
+		<input type="text" ng-model="search" class="form-control" placeholder="Search"></input>
+	<!--<div class class="form-control" >
+		From Tour: <br> 
+		<select class="form-control" ng-options="tour as tour.title for tour in tours" ng-model="selected_tour">
+			<option value=""> All Tours </option>
+			
+		</select>					
+	</div>-->
+ </div>
+ <table class="table">
+    <thead>
+    <tr>
+      <th ng-click="sort('name')">Title
+		<span class="glyphicon sort-icon" ng-show="sortKey=='title'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+	  </th>
+     
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr ng-repeat="location in locations|orderBy:sortKey:reverse|filter:search">
+	   <!--<td>{{location._id}}</td>
+	   <td>{{location.title}}</td> -->
+	  <td>{{location.title}}</td>
+	  <td> <button class="btn btn-primary" ng-click="linkExistingLocation(location._id)"> Select</button></td>
+    </tr>
+    </tbody>
+
+  </table>
+	  
+    </div>
+        <div class="modal-footer close-btn-main">
+			<button type="button"
+				class="btn btn-default pull-left"
+				ng-click="$hide()">Close
+			</button>
+        </div>
+
+     </div>
+    </div>
+  </div>
