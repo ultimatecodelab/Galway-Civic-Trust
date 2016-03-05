@@ -6,7 +6,11 @@ var Schema = mongoose.Schema;
 var LocationSchema = new Schema({
   image: String,
   title: String,
-  tourId : String,
+  
+   tourId : String,
+   tourIdArr : [String],
+   sharedCounter:Number,
+  
   description: String,
   location: String,
   xCoordinate: String,
