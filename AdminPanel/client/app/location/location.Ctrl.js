@@ -20,6 +20,39 @@
 	$scope.editLocation2 = null;
 	$scope.updatedlocation = null;
 	
+	//unlink Location
+	$scope.unlinkLocation = function(locId) {
+	
+		$scope.pair={"locationID":locId, "TourID":$scope.id};
+		
+		toursAPI.unlinkLocation($scope.pair)
+        .then(function(data) {
+          console.log('Linked Successfully');
+          console.log(data);
+          alertSuccess.show();
+        })
+        .catch(function(err) {
+          console.log('failed to update' + err);
+          alertFail.show();
+        });
+		
+    }//unlinkLocation
+	
+	$scope.linkExistingLocation = function(locId) {
+		$scope.pair={"locationID":locId, "TourID":$scope.id};
+		toursAPI.linkExistingLocation($scope.pair)
+        .then(function(data) {
+          console.log('Linked Successfully');
+          console.log(data);
+          alertSuccess.show();
+        })
+        .catch(function(err) {
+          console.log('failed to update' + err);
+          alertFail.show();
+        });
+		
+    }//linkExistingLocation
+	
 	//retriving all the locations. Admin will be able to select the 
 	//existing location and map with a new tour...
 	$scope.locations=[]; //holds all the locations
