@@ -5,6 +5,33 @@ var express = require('express');
 var utils = require('../../utils/utils.js');
 
 
+exports.unlinkTour = function(req, res) {
+	console.log("Printing..................." + req.body.TourID)
+	LocationSchema.findById(req.params.id, function(err, location) {
+		if(err) {
+			return handleError(res, err);
+		}
+		if(!location) {
+		 console.log('failed... ')
+		  return res.send(404);
+		}
+		
+		if(req.body.TourID){
+			location.tourIdArr.pull(req.body.TourID);
+			location.sharedCounter-=1;
+			location.save(function(err) {
+			if(err) {
+
+			  return handleError(res, err);
+			}
+			console.log(location);
+			return res.json(location);
+		  });//end of save*/
+	  }//end of if
+	});//end of findby
+	
+ };
+ 
 exports.linkTour = function(req, res) {
 
 	console.log("Printing..................." + req.body.TourID)
