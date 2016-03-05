@@ -34,7 +34,12 @@ router.get('/getLocations', tourLocationController.locations);
 //update
 router.put('/:id', auth.isAuthenticated(), tourLocationController.update);
 
+router.put('/linkLocation/:id',auth.isAuthenticated(), tourLocationController.linkTour);
+router.put('/unlinkLocation/:id',auth.isAuthenticated(), tourLocationController.unlinkTour);
+
+
 router.get('/getAllTours', controller.allTours);
+router.get('/getAllLocations', tourLocationController.allLocations);
 //get the location details (single location)
 router.get('/:locationId', tourLocationController.singleLocation);
 router.get('/getAllToursJson',basicAuthentication, controller.allTours);
