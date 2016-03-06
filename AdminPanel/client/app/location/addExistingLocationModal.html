@@ -1,0 +1,139 @@
+<div class="modal" tabindex="-1" role="dialog" ng-init="getAllLocations()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header" ng-show="title">
+        <button type="button"
+                    class="close"
+                    ng-click="$hide()"><i class="fa fa-times"></i></button>
+        <h4 class="modal-title">Add New Tour</h4>
+      </div>
+
+  <div class="modal-body"
+          ng-show="showUploadForm()">
+      <div class="spinner"
+             ng-show="loading">
+        <img src="assets/images/spinner.gif">
+      </div>
+
+    <div class="col-md-6" id="alertContainer"></div>
+
+  <div class="listing-details">
+        <div class="form-group">
+          <div class="row listing-description-row">
+            <label for="description"
+                      class="col-xs-12">Description</label></div>
+			
+            <textarea class="form-control"
+                           rows="3"
+                           ng-model="tour.description">
+            </textarea>
+              </div>
+
+           <div class="form-group">
+             <div class="listing-image">
+                <img src="{{tour.imgThumb}}"
+                        class="img-thumbnail img-responsive">
+              </div>
+             </div>
+      <button type="submit"
+                  class="btn btn-primary">Submit</button>
+      <button type="button"
+                  class="btn btn-default"
+                  ng-click="$hide()">Cancel</button>
+      </div>
+    </div>
+  
+
+    <div class="modal-body">
+      <div class="uploadLookTitle">
+		
+      </div>
+	  
+    </div>
+
+    <form name="myForm"
+              enctype="multipart/form-data"
+              >
+      <div class="row row-centered">
+        <div class="col-centered">
+          <div class="well well-lg">
+            <div class="form-group">
+              <label class="control-label"
+                        for="picFile"><h3>Select SHT Location</h3></label>
+			<div class = "form-group" >
+				<select ng-options="location as location.title for location in locations" ng-model="selected_location">
+					<option value=""> Choose a name </option>
+					
+				</select>
+				Select your existing location.
+							
+			</div>
+             <div class="form-group">
+                <input type="text"
+                          class="form-control"
+                          placeholder="Title"
+                          ng-model="selected_location.title" required /><i ng-show="myForm.title.$error.required">*required</i>
+              </div>
+			  <div class="form-group">
+                <input type="text"
+                          class="form-control"
+                          placeholder="Enter Location"
+                          ng-model="selected_location.location" required /><i ng-show="myForm.title.$error.required">*required</i>
+              </div>
+                 <div class="form-group">
+                    <textarea class="form-control"
+                              placeholder="Description"
+                              rows="3"
+                              ng-model="selected_location.description" required />
+                              <i ng-show="myForm.description.$error.required">*required</i>
+                            </textarea>
+                      </div>
+			<div class="form-group">
+                <input type="text"
+                          class="form-control"
+                          placeholder="Exact XCoordinate(if known)"
+                          ng-model="selected_location.xCoordinate" required /><i ng-show="myForm.title.$error.required">*required</i>
+              </div>
+			  <div class="form-group">
+                <input type="text"
+                          class="form-control"
+                          placeholder="Exact yCoordinate(if known)"
+                          ng-model="selected_location.yCoordinate" required /><i ng-show="myForm.title.$error.required">*required</i>
+              </div>
+			  <div class="form-group">
+                <input type="text"
+                          class="form-control"
+                          placeholder="Image Source (URL)"
+                          ng-model="selected_location.imageSource" required /><i ng-show="myForm.title.$error.required">*required</i>
+              </div>
+              <div class="controls">
+                
+					<button id="loadButton"
+								ng-disabled="!myForm.$valid"
+								class="btn btn-primary btn-lg"
+								ng-click="uploadPic(picFile)">Link Tour</button>
+
+                <div class="col-md-6" id="alertContainer"></div>
+                <img ngf-src="picFile"
+                        class="img-thumbnail img-responsive"
+                        ng-show="picPreview">
+
+                <span ng-show="picFile.result">Upload Successful</span>
+                <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div class="modal-footer close-btn-main">
+        <button type="button"
+                    class="btn btn-default pull-left"
+                    ng-click="$hide()">Close</button>
+                    </div>
+
+      </div>
+    </div>
+  </div>

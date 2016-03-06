@@ -1,33 +1,19 @@
 var nodemailer = require('nodemailer');
-var user = require('./api/user/user.controller.js')
-
-var transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-        user: 'swordanchorthesis@gmail.com',
-        pass: 'hackreactor1'
-    }
-});
-
+var user = require('./api/user/user.controller.js');
+var sendgrid  = require('sendgrid')('API-KEY');
 
 exports.reset = function(req, res) {
-    // setup e-mail
-    var newPass = user.resetPassword(req.query.email);
 
-    var mailOptions = {
-        from: 'SnapIt Team <swordanchorthesis@gmail.com>', // sender address
+	var newPass = user.resetPassword(req.query.email);
+	sendgrid.send({
+	  from: 'Galway Civic Trust - <noreply@gct.ie>', // sender address
         to: req.query.email,
-        subject: 'New SnapIt password.', // Subject line
-        html: '<b>Your new password is ' + newPass + '.  </b><a href="http://localhost:9000/login">Login here.</a>' // html body
-    };
-
-    transporter.sendMail(mailOptions, function(error, info){
-        if(error){
-            console.log(error);
-        }else{
-            console.log('Message sent: ' + info.response);
-        }
-    });
+        subject: 'New password password.', // Subject line
+        html: '<b>Your new password is ' + newPass + '.  </b><a href="http://localhost:9000/">Login here.</a>' // html body
+	}, function(err, json) {
+	  if (err) { return console.error(err); }
+	  console.log(json);
+	});
 
     res.end();
 };

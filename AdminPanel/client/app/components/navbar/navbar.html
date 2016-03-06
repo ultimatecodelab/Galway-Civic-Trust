@@ -26,6 +26,9 @@
 
         <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}">
         <a ui-sref="admin">User Management</a></li>
+		
+		 <li ng-show="isAdmin()" ng-class="{active: isActive('/signup')}">
+        <a ui-sref="signup" id="nav-internal">System User Registration</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right" >
@@ -34,14 +37,14 @@
           <a ui-sref="myTours" id="nav-internal">Control Panel</a>
         </li>-->
 
-        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}">
-        <a ui-sref="signup" id="nav-internal">Sign up</a></li>
+       
+       
 
         <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}">
         <a ui-sref="login" id="nav-internal">Login</a></li>
 
         <li ng-show="isLoggedIn()">
-		<a ng-disabled="isDisabled" id="nav-internal">{{ getCurrentUser().name}}</a></li>
+		<a ng-disabled="isDisabled" id="nav-internal">Welcome,{{ getCurrentUser().name}}</a></li>
 
         <li ng-show="isLoggedIn()" ng-class="{active: isActive('/profile')}">
         <a ui-sref="profile"><span class="glyphicon glyphicon-cog"></span></a></li>

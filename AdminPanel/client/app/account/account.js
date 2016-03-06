@@ -18,6 +18,7 @@
         url: '/signup',
         templateUrl: 'app/account/signup/signup.html',
         controller: 'SignupCtrl'
+		//authenticate: true
       })
       .state('settings', {
         url: '/settings',

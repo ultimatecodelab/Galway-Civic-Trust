@@ -2,8 +2,8 @@
   "name": "gct",
   "version": "1.0.0",
   "main": "server/app.js",
-  "scripts":{
-	"start": "node server/app.js"
+  "scripts": {
+    "start": "node server/app.js"
   },
   "dependencies": {
     "body-parser": "^1.13.3",
@@ -35,6 +35,7 @@
     "path": "*",
     "request": "^2.65.0",
     "requirejs": "^2.1.18",
+    "sendgrid": "^2.0.0",
     "serve-favicon": "^2.3.0"
   },
   "engines": {

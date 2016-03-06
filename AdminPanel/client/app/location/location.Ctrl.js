@@ -12,8 +12,8 @@
     $scope.user = Auth.getCurrentUser();
     $scope.id = $stateParams.tourId;
 	$scope.tourSpot = [];
-	$scope.editLocation = {};
 	
+	$scope.editLocation = {};
 	$scope.selectedIndex = 0;
 	$scope.selectedLocation = $scope.tourSpot[0];
 	$scope.selectedIndex = $scope.tourSpot[0];
@@ -52,7 +52,7 @@
         });
 		
     }//linkExistingLocation
-	
+  
 	//retriving all the locations. Admin will be able to select the 
 	//existing location and map with a new tour...
 	$scope.locations=[]; //holds all the locations
@@ -67,8 +67,8 @@
         console.log('failed to get locations ' + err);
       });
 	  
-	//getting tours from the toursAPI
-	$scope.tours = [];
+	  //getting tours from the toursAPI
+	 $scope.tours = [];
 	 toursAPI.getAllTours()
       .then(function(data) {
         console.log('TOURS found ');
@@ -161,7 +161,9 @@
 		console.log('failed to get looks for user ' + err);
 	  });
 	 }
-	  
+	 
+	
+	 
 	  //deleting the specific location from the API
 	  $scope.deleteLocation = function(location) {
 	    var index = $scope.tourSpot.indexOf(location); //updating the array

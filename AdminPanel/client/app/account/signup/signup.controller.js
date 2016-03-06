@@ -12,7 +12,7 @@
     $scope.errors = {};
 
     if (Auth.isLoggedIn()) {
-      $state.go('main');
+      //$state.go('main');
     }
 
     $scope.register = function(form) {
