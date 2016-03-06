@@ -1,6 +1,8 @@
 var nodemailer = require('nodemailer');
 var user = require('./api/user/user.controller.js');
-var sendgrid  = require('sendgrid')('API-KEY');
+var sendgrid  = require('sendgrid')('SEND-GRID-API-KEY');
+
+//put the api key in environment variable
 
 exports.reset = function(req, res) {
 
@@ -17,3 +19,4 @@ exports.reset = function(req, res) {
 
     res.end();
 };
+//display confirmation message in the html page..
