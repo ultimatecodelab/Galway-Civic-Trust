@@ -72,16 +72,18 @@
                           class="form-control"
                           placeholder="Enter Location"
                           ng-model="tour.location" required /><i ng-show="myForm.title.$error.required">*required</i>
-              </div>
+              </div> -->
                  <div class="form-group">
                     <textarea class="form-control"
-                              placeholder="Description"
+                              placeholder="Short Description"
                               rows="3"
+							  maxlength="400"
+							  
                               ng-model="tour.description" required />
                               <i ng-show="myForm.description.$error.required">*required</i>
                             </textarea>
-                      </div>
-			<div class="form-group">
+                   </div>
+			<!--<div class="form-group">
                 <input type="text"
                           class="form-control"
                           placeholder="Exact XCoordinate(if known)"

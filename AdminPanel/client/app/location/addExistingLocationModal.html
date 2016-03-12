@@ -108,13 +108,13 @@
                           ng-model="selected_location.imageSource" required /><i ng-show="myForm.title.$error.required">*required</i>
               </div>
               <div class="controls">
-                
+					
 					<button id="loadButton"
 								ng-disabled="!myForm.$valid"
 								class="btn btn-primary btn-lg"
 								ng-click="uploadPic(picFile)">Link Tour</button>
 
-                <div class="col-md-6" id="alertContainer"></div>
+                <<div class="col-md-6" id="alertContainer"></div>
                 <img ngf-src="picFile"
                         class="img-thumbnail img-responsive"
                         ng-show="picPreview">

@@ -73,7 +73,8 @@
 	   <!--<td>{{location._id}}</td>
 	   <td>{{location.title}}</td> -->
 	  <td>{{location.title}}</td>
-	  <td> <button class="btn btn-primary" ng-click="linkExistingLocation(location._id)"> Select</button></td>
+	  <td> <button class="btn btn-primary" ng-click="linkExistingLocation(location)"> {{buttonStatus}}</button></td>
+	  <td><button class ="btn btn-danger" ng-click="deleteLocation(location)"> Delete permanently</button> </td>
     </tr>
     </tbody>
 

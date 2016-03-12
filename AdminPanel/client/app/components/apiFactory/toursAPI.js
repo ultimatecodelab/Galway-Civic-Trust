@@ -13,6 +13,7 @@
 		getAllLocations: getAllLocations,
 		getLocationsOfThisCategory: getLocationsOfThisCategory,
 		deleteLocation: deleteLocation,
+		getSpecificTour:getSpecificTour,
 		deleteTour: deleteTour,
 		getUpdateLocation:getUpdateLocation,
 		updateLocation:updateLocation,
@@ -41,13 +42,13 @@
 
       function getAllTours() {
         return $http.get('/api/tour/getAllTours', {
-          cache: true
+          //cache: true
         });
       }
 	  
 	  function getAllLocations() {
         return $http.get('/api/tour/getAllLocations', {
-          cache: true
+         // cache: true
         });
       }
 	  //getting the details of the specific location
@@ -55,10 +56,14 @@
 	  console.log("Passing " + location._id);
         return $http.get('/api/tour/' + location._id);
       }
+	  function getSpecificTour(tour) {
+	  console.log("Passing " + tour._id);
+        return $http.get('/api/tour/updateTour/' + tour._id);
+      }
 
 	function getLocationsOfThisCategory(id) {
         return $http.get('/api/tour/getLocations/?tourId=' + id, {
-          cache: true
+          //cache: true
         });
       }
     }

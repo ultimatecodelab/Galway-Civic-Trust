@@ -18,17 +18,23 @@ exports.linkTour = function(req, res) {
 		}
 		
 		if(req.body.TourID){
-			location.tourIdArr.push(req.body.TourID);
-			location.sharedCounter+=1;
-			location.save(function(err) {
-			if(err) {
+			if(location.tourIdArr.indexOf(req.body.TourID)==-1){
+			 
+				location.tourIdArr.push(req.body.TourID);
+				location.sharedCounter+=1;
+				location.save(function(err) {
+				if(err) {
 
-			  return handleError(res, err);
-			}
-			console.log(location);
-			return res.json(location);
-		  });//end of save*/
+				  return handleError(res, err);
+				}
+				console.log(location);
+				return res.json(location);
+			  });//end of save*/
+			}//if not already linked
 	  }//end of if
+	  else{
+	   return res.send(404);
+	  }
 	});//end of findby
 	
  };
@@ -194,5 +200,45 @@ exports.locations = function(req, res) {
     return res.status(200)
                    .json(spots);
   });
+};
+//--------------------------------------------
+exports.updateCurrentLocation = function(req, res) {
+  LocationSchema.findById(req.body.locationID, function(err, loc) {
+    if(err) {
+      return handleError(res, err);
+    }
+    if(!loc) {
+      return res.send(404);
+    }
+	try {
+     var fileimage = req.middlewareStorage.fileimage;
+	 loc.image = '/assets/images/uploads/' + fileimage;
+	}
+	catch(err) {
+		console.log("no image found...")
+	}
+	  loc.title = req.body.title;
+	  loc.description = req.body.description;
+	  loc.location = req.body.location;
+	  loc.xCoordinate = req.body.xCoordinate;
+	  loc.yCoordinate = req.body.yCoordinate;
+	  loc.imageSource = req.body.imageSource;
+	  
+	  loc.createTime = Date.now();
+
+	  loc.save(function(err, savedTour) {
+		if(err) {
+		  console.log('error saving tour');
+		  return res.send(500);
+		} else {
+		  console.log(savedTour);
+		  //res.status(200)
+			   //.send(look);
+			   return res.json(savedTour);
+		}
+	  });
+		
+	  });
+	  
 };
 

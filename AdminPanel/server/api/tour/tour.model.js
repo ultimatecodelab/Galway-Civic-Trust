@@ -6,7 +6,8 @@ var Schema = mongoose.Schema;
 var TourSchema = new Schema({
   image: String,
   title: String,
- /* description: String,
+  description:String,
+  /*
   location: String,
   xCoordinate: String,
   yCoordinate: String,

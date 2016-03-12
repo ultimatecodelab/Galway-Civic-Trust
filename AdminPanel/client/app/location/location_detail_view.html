@@ -2,30 +2,28 @@
  <div id="searchFilterWrap">
         <form id="searchForm">
           <input type="text"
-                    id="searchBox"
-                    placeholder="Search by title"
-                    ng-model="searchTxt"
-                    ng-model-options="{debounce : 600}" />
+			id="searchBox"
+			placeholder="Search by title"
+			ng-model="searchTxt"
+			ng-model-options="{debounce : 600}" />
         </form>
-        <div class="modal-backdrop-am-fade"
-              id="sortByWrap">
-				<button class="btn btn-primary"
-				  data-animation="am-fade-and-scale"
-				  data-placement="center"
-				  data-template-url="app/location/addLocationModal.html"
-				  bs-modal="showModal">Add New Location</button>
-				 
-				 <button class="btn btn-primary"
-				  data-animation="am-fade-and-scale"
-				  data-placement="center"
-				 
-				  data-template-url="app/location/addExistingLocationModal2.html"
-				  bs-modal="showModal">Add Existing</button>
+        <div class="modal-backdrop-am-fade" id="sortByWrap">
+			<button class="btn btn-primary"
+			  data-animation="am-fade-and-scale"
+			  data-placement="center"
+			  data-template-url="app/location/addLocationModal.html"
+			  bs-modal="showModal">Add New Location</button>
+			 
+			 <button class="btn btn-primary"
+			  data-animation="am-fade-and-scale"
+			  data-placement="center"
+			  data-template-url="app/location/addExistingLocationModal2.html"
+			  bs-modal="showModal">View/Add Existing Locations</button>
 							  
          </div>
  </div>
  
- <div class = "row">
+ <div ng-init="init()"class = "row">
 	<div class = "col-md-4">
 	<table class="table">
     <thead>
@@ -37,7 +35,7 @@
 		<span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
 	  </th>
     </tr>
-	<div ng-show="tourSpot.length==0">
+	<div ng-init = "init()"ng-show="tourSpot.length==0">
 	<!-- if no data is present, print no data found -->
 		<div class="alert alert-info">
 			<p calss="text-center"> No locations found in this tour. 
@@ -58,50 +56,49 @@
     </tbody>
 
   </table>
-  
-	</div>
-	<div  ng-show="selectedLocation!=null" class = "col-md-5">
-		<div class = "panel panel-default" >
-		<div class = "panel-body">
-		
-			<dt> Location Title </dt>
-			<dd> {{selectedLocation.title}}</dd>
-			<dt> Location </dt>
-			<dd> {{selectedLocation.location}}</dd>
-			<dt> Description </dt>
-			<dd> {{selectedLocation.description}}</dd>
-			<dd> 
-			 <img ng-src="../..{{selectedLocation.image}}" alt="No location Selected" height ="350" width="400"/> 
-			</dd>
-			<dt> Location Lat </dt>
-			<dd> {{selectedLocation.xCoordinate}}</dd>
-			<dt> Location Long </dt>
-			<dd> {{selectedLocation.yCoordinate}}</dd>
-			<dt> Image URL </dt>
-			<dd> {{selectedLocation.imageSource}}</dd>
-			
-			
-			<dd> <td> <button class ="btn btn-primary" ng-click="unlinkLocation(selectedLocation._id)"> Remove from this tour only</button> </td>
-		   <td><button class="btn btn-primary"  ng-click="editLocation(selectedLocation)"
-						  data-animation="am-fade-and-scale"
-						  data-placement="center"
-						  data-template-url="app/location/editLocations.html"
-						  bs-modal="showModal">Edit</button><td> 
-			</dd>
-			<br>
-			<dd> <td> <button class ="btn btn-danger" ng-click="deleteLocation(selectedLocation)"> Delete permanently</button><b> This particular location 
-			will be deleted permanently from the database.</td>
-			<dd> </br> </dd>
-		</div> 
-	
-	</div>
  </div>
- 
- </div> 
- <style>
-    .header {
-        color: #36A0FF;
-        font-size: 27px;
-        padding: 10px;
-    }
+<div  ng-show="selectedLocation!=null && tourSpot.length!=0" class = "col-md-5">
+	<div class = "panel panel-default" >
+	<div class = "panel-body">
+	
+		<dt> Location Title </dt>
+		<dd> {{selectedLocation.title}}</dd>
+		<dt> Location </dt>
+		<dd> {{selectedLocation.location}}</dd>
+		<dt> Description </dt>
+		<dd> {{selectedLocation.description}}</dd>
+		<dd> 
+		 <img ng-src="../..{{selectedLocation.image}}" alt="No location Selected" height ="350" width="400"/> 
+		</dd>
+		<dt> Location Lat </dt>
+		<dd> {{selectedLocation.xCoordinate}}</dd>
+		<dt> Location Long </dt>
+		<dd> {{selectedLocation.yCoordinate}}</dd>
+		<dt> Image URL </dt>
+		<dd> {{selectedLocation.imageSource}}</dd>
+		
+		
+		<dd> <td> <button class ="btn btn-primary" ng-click="unlinkLocation(selectedLocation)"> Remove from this tour only</button> </td>
+	   <td><button class="btn btn-primary"  ng-click="editLocation(selectedLocation)"
+					  data-animation="am-fade-and-scale"
+					  data-placement="center"
+					  data-template-url="app/location/editLocations.html"
+					  bs-modal="showModal">Edit</button><td> 
+		</dd>
+		<br>
+		<dd> <td> <button class ="btn btn-danger" ng-click="deleteLocation(selectedLocation)"> Delete permanently</button><b> This particular location 
+		will be deleted permanently from the database.</td>
+		<dd> </br> </dd>
+	</div> 
+
+</div>
+</div>
+
+</div> 
+<style>
+.header {
+	color: #36A0FF;
+	font-size: 27px;
+	padding: 10px;
+}
 </style>

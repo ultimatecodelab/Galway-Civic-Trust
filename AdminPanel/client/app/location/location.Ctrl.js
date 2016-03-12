@@ -12,6 +12,9 @@
     $scope.user = Auth.getCurrentUser();
     $scope.id = $stateParams.tourId;
 	$scope.tourSpot = [];
+	$scope.locations={};
+	
+	$scope.locModal={}; //modal to bind with the form
 	
 	$scope.editLocation = {};
 	$scope.selectedIndex = 0;
@@ -19,32 +22,40 @@
 	$scope.selectedIndex = $scope.tourSpot[0];
 	$scope.editLocation2 = null;
 	$scope.updatedlocation = null;
+	$scope.buttonStatus = "Link";
 	
 	//unlink Location
-	$scope.unlinkLocation = function(locId) {
-	
-		$scope.pair={"locationID":locId, "TourID":$scope.id};
+	$scope.unlinkLocation = function(locToUnlink) {
+		var index = $scope.tourSpot.indexOf(locToUnlink); //index of the location in an array tourSpot
+		
+		$scope.pair={"locationID":locToUnlink._id, "TourID":$scope.id};
 		
 		toursAPI.unlinkLocation($scope.pair)
         .then(function(data) {
-          console.log('Linked Successfully');
+          console.log('unlinked Successfully');
           console.log(data);
-          alertSuccess.show();
+		  $scope.tourSpot.splice(index, 1);
+		  $scope.selectedLocation = $scope.tourSpot[0];
         })
         .catch(function(err) {
           console.log('failed to update' + err);
-          alertFail.show();
+          //alertFail.show();
         });
 		
     }//unlinkLocation
 	
-	$scope.linkExistingLocation = function(locId) {
-		$scope.pair={"locationID":locId, "TourID":$scope.id};
+	$scope.linkExistingLocation = function(locToLink) {
+		$scope.pair={"locationID":locToLink._id, "TourID":$scope.id};
 		toursAPI.linkExistingLocation($scope.pair)
         .then(function(data) {
           console.log('Linked Successfully');
           console.log(data);
-          alertSuccess.show();
+		  
+		  $scope.tourSpot.splice(0, 0, data.data);//modal array
+		  console.log("The title is: " + data.data._id);
+		  //$scope.tourSpot.data=data.data;
+		  //$scope.init();
+		  
         })
         .catch(function(err) {
           console.log('failed to update' + err);
@@ -61,7 +72,6 @@
         console.log(data);
         $scope.locations = data.data;
 		console.log($scope.locations);
-		console.log("the title is: " + $scope.locations[0].title);
       })
       .catch(function(err) {
         console.log('failed to get locations ' + err);
@@ -97,17 +107,58 @@
         });
 		}
 	}
+	
+	//image update location....
+	$scope.updateCurrentLocation = function(file) {
+	//console.log($scope.tour);
+      Upload.upload({
+        url: '/api/tour/updateCurrentLocation',
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+        data: {
+          file: file,
+		  locationID : $scope.editLocation._id,
+          title: $scope.editLocation.title,
+		  description: $scope.editLocation.description,
+		  location: $scope.editLocation.location,
+		  xCoordinate: $scope.editLocation.xCoordinate,
+		  yCoordinate: $scope.editLocation.yCoordinate,
+		  imageSource: $scope.editLocation.imageSource,
+          _creator: $scope.user._id
+        }
+      }).then(function(resp) {
+		alertSuccess.show();
+        //console.log('success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+      // $scope.tourSpot.splice(0, 0, resp.data);
+	   var location = $scope.editLocation;
+	   var index = $scope.tourSpot.indexOf($scope.selectedLocation); 
+		$scope.tourSpot[index] = resp.data;
+	   $scope.editLocation.title = '';
+        $scope.picFile = '';
+        $scope.picPreview = false;
+		alertSuccess.show();
+       
+      }, function(resp) {
+		
+        alertFail.show();
+      }, function(evt) {
+        var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+      });
+	  
+    }//uploadtours
+	
+	//------------------------------------------
 	$scope.saveLocation = function() {
-	  console.log("here.....................")
       var location = $scope.editLocation;
-
+	  var index = $scope.tourSpot.indexOf($scope.selectedLocation); 
       toursAPI.updateLocation(location)
         .then(function(data) {
           console.log('Location updated');
           console.log(data);
-          /*$scope.editLocation.title = '';
-          $scope.editLocation.description = '';*/
           alertSuccess.show();
+		  $scope.tourSpot[index] = data.data; //details changed
+		 
         })
         .catch(function(err) {
           console.log('failed to update' + err);
@@ -134,21 +185,7 @@
       duration: 8
 	 
     })
-	$scope.nextPage = function() {
-        var tourLength = $scope.tours.length;
-        if($scope.busy) {
-          return;
-        }
-        $scope.busy = true;
-        $scope.tours = $scope.tours.concat($scope.allData.splice(page * step, step));
-        page++;
-        $scope.busy = false;
-        if($scope.tours.length === 0) {
-          $scope.noMoreData = true;
-        }
-      }; //infinite scrolling page
-	
-	//getting the tour locations based on the tourID 
+
 	console.log("id is: " + $scope.id);
 	
 	$scope.init = function (){
@@ -160,10 +197,8 @@
 	  .catch(function(err) {
 		console.log('failed to get looks for user ' + err);
 	  });
-	 }
-	 
-	
-	 
+	}
+	  
 	  //deleting the specific location from the API
 	  $scope.deleteLocation = function(location) {
 	    var index = $scope.tourSpot.indexOf(location); //updating the array
@@ -171,6 +206,7 @@
         .then(function(data) {
           console.log('success, location deleted');
          $scope.tourSpot.splice(index, 1);
+		 $scope.locations.splice(index,1); //deleting from the modal
 		 $scope.selectedLocation = $scope.tourSpot[0];
         })
         .catch(function(err) {
@@ -179,7 +215,7 @@
     }
 	
 	$scope.uploadPic = function(file) {
-	console.log($scope.tour);
+	  //console.log($scope.tour);
       Upload.upload({
         url: '/api/tour/uploadLocation',
         headers: {
@@ -187,25 +223,19 @@
         },
         data: {
           file: file,
-          title: $scope.tourSpot.title,
+          title: $scope.locModal.title,
 		  tourId : $stateParams.tourId,
-		  location: $scope.tourSpot.location,
-          description: $scope.tourSpot.description,
-		  xCoordinate : $scope.tourSpot.xCoordinate,
-		  yCoordinate : $scope.tourSpot.yCoordinate,
-		  imageSource: $scope.tourSpot.imageSource,
+		  location: $scope.locModal.location,
+          description: $scope.locModal.description,
+		  xCoordinate : $scope.locModal.xCoordinate,
+		  yCoordinate : $scope.locModal.yCoordinate,
+		  imageSource: $scope.locModal.imageSource,
           _creator: $scope.user._id
         }
       }).then(function(resp) {
 		alertSuccess.show();
+		$scope.tourSpot.splice(0, 0, resp.data);
         console.log('success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-        $scope.tourSpot.title = '';
-        $scope.tourSpot.description = '';
-		$scope.tourSpot.xCoordinate = ' ' ;
-		$scope.tourSpot.yCoordinate = ' ' ;
-		$scope.tourSpot.imageSource = ' ' ;
-		$scope.tourSpot.location = ' ' ;
-        $scope.tourSpot = '';
         $scope.picPreview = false;
        
       }, function(resp) {
@@ -214,6 +244,11 @@
         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
         console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
       });
-     }//uploadtours
-	}
+    }//uploadtours
+	console.log("calling init");
+	$scope.init();
+	console.log("After init");
+	 
+	}//upload pic
+	
 })();

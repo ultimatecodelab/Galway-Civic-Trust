@@ -18,7 +18,7 @@
     function getAllUsers() {
       var url = '/api/users';
       return $http.get(url, {
-        cache: true
+        //cache: true
       });
     }
 

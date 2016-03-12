@@ -63,23 +63,50 @@ exports.userTours = function(req, res) {
 };
 
 
+exports.updateTour = function(req, res) {
+  Tour.findById(req.body.tourid, function(err, tour) {
+    if(err) {
+      return handleError(res, err);
+    }
+    if(!tour) {
+      return res.send(404);
+    }
+	try {
+     var fileimage = req.middlewareStorage.fileimage;
+	 tour.image = '/assets/images/uploads/' + fileimage;
+	}
+	catch(err) {
+		console.log("no image found...")
+	}
+  tour.title = req.body.title;
+  tour.description = req.body.description;
+  tour.createTime = Date.now();
+
+  tour.save(function(err, savedTour) {
+    if(err) {
+      console.log('error saving tour');
+      return res.send(500);
+    } else {
+      console.log(savedTour);
+      //res.status(200)
+           //.send(look);
+		   return res.json(savedTour);
+    }
+  });
+    
+  });
+};
+
+
+
 exports.upload = function(req, res) {
   var newTour = new Tour();
   var fileimage = req.middlewareStorage.fileimage;
-
-  console.log(req.body);
+	
+  console.log("The description is :"+ req.body.description);
   newTour.image = '/assets/images/uploads/' + fileimage;
-  //newTour.email = req.body.email;
-  //change this
-  //newTour.linkURL = req.body.linkURL;
   newTour.title = req.body.title;
-  /*newTour.description = req.body.description;
-  newTour.location = req.body.location;
-  newTour.xCoordinate = req.body.xCoordinate;
-  newTour.yCoordinate = req.body.yCoordinate;
-  newTour.imageSource = req.body.imageSource;*/
- // newTour.userName = req.body.name;
- // newTour._creator = req.body._creator;
+  newTour.description = req.body.description;
   newTour.createTime = Date.now();
 
   newTour.save(function(err, look) {
@@ -96,14 +123,14 @@ exports.upload = function(req, res) {
 
 
 exports.singleTour = function(req, res) {
-  Tour.findById(req.params.lookId, function(err, look) {
+  Tour.findById(req.params.tourID, function(err, tour) {
     if(err) {
       return handleError(res, err);
     }
-    if(!look) {
+    if(!tour) {
       return res.send(404);
     }
-    return res.json(look);
+    return res.json(tour);
   });
 };
 
