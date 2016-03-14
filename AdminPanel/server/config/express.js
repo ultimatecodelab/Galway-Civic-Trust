@@ -23,6 +23,11 @@ var mongoose = require('mongoose');
 module.exports = function(app) {
   // var env = app.get('env');
   var env = 'development';
+  app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
   app.set('views', config.root + '/server/views');
   app.engine('html', require('ejs').renderFile);

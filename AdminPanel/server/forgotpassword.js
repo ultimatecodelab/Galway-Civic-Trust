@@ -11,7 +11,7 @@ exports.reset = function(req, res) {
 	  from: 'Galway Civic Trust - <noreply@gct.ie>', // sender address
         to: req.query.email,
         subject: 'New password password.', // Subject line
-        html: '<b>Your new password is ' + newPass + '.  </b><a href="http://127.0.0.1:9000/">Login here.</a>' // html body
+        html: '<b>Your new password is ' + newPass + '.  </b><a href="http://127.0.0.1/">Login here.</a>' // html body
 	}, function(err, json) {
 	  if (err) { return console.error(err); }
 	  console.log(json);
