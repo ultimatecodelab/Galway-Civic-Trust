@@ -15,9 +15,10 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat="user in users">
-				<td >{{user.name}}</td>
+				<td>{{user.name}}</td>
 			   <td>{{user.email}}</td>
-			   <td> <button class ="btn btn-danger" ng-click="deleteUser(user)"> Delete</button></td>
+			   <td ng-if="user.role!='admin'"> <button class ="btn btn-danger" ng-click="deleteUser(user)"> Delete</button></td>
+			   <td  ng-if="user.role=='admin'">Super admin (root) can't be deleted</td>
 			</tr>
 		</tbody>
 	</table>
