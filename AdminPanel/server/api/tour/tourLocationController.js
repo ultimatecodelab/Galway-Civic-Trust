@@ -120,7 +120,7 @@ exports.upload = function(req, res) {
   newLocation.location = req.body.location;
   newLocation.xCoordinate = req.body.xCoordinate;
   newLocation.yCoordinate = req.body.yCoordinate;
-  newLocation.imageSource = req.body.imageSource;
+  newLocation.walkNumber = req.body.walkNumber;
   //tour cat id
   newLocation.tourId = req.body.tourId;
  
@@ -222,7 +222,7 @@ exports.updateCurrentLocation = function(req, res) {
 	  loc.location = req.body.location;
 	  loc.xCoordinate = req.body.xCoordinate;
 	  loc.yCoordinate = req.body.yCoordinate;
-	  loc.imageSource = req.body.imageSource;
+	  loc.walkNumber = req.body.walkNumber;
 	  
 	  loc.createTime = Date.now();
 

@@ -94,10 +94,16 @@
                           ng-model="locModal.yCoordinate" required /><i ng-show="myForm.title.$error.required">*required</i>
               </div>
 			  <div class="form-group">
-                <input type="text"
+                <input type="number"
                           class="form-control"
-                          placeholder="Image Source (URL)"
-                          ng-model="locModal.imageSource" required /><i ng-show="myForm.title.$error.required">*required</i>
+						  step="1"
+						  min="1"
+						  max="5"
+						  value="{{1}}"
+						  
+						  maxlength="1"
+                          placeholder="Walk Number"
+                          ng-model="locModal.walkNumber" required /><i ng-show="myForm.title.$error.required">*required</i>
               </div>
               <div class="controls">
                 <input class="bottom-marg-15"

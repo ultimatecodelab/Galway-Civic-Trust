@@ -15,7 +15,7 @@ var LocationSchema = new Schema({
   location: String,
   xCoordinate: String,
   yCoordinate: String,
-  imageSource : String,
+  walkNumber : Number,
   
   _creator: {
     type: Schema.ObjectId,

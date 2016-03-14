@@ -124,7 +124,7 @@
 		  location: $scope.editLocation.location,
 		  xCoordinate: $scope.editLocation.xCoordinate,
 		  yCoordinate: $scope.editLocation.yCoordinate,
-		  imageSource: $scope.editLocation.imageSource,
+		  walkNumber: $scope.editLocation.walkNumber,
           _creator: $scope.user._id
         }
       }).then(function(resp) {
@@ -229,7 +229,7 @@
           description: $scope.locModal.description,
 		  xCoordinate : $scope.locModal.xCoordinate,
 		  yCoordinate : $scope.locModal.yCoordinate,
-		  imageSource: $scope.locModal.imageSource,
+		  walkNumber: $scope.locModal.walkNumber,
           _creator: $scope.user._id
         }
       }).then(function(resp) {
