@@ -7,6 +7,7 @@ var TourSchema = new Schema({
   image: String,
   title: String,
   description:String,
+  status: Boolean,'default':false,
   /*
   location: String,
   xCoordinate: String,

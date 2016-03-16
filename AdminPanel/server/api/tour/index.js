@@ -16,8 +16,10 @@ router.put('/:id', auth.isAuthenticated(), tourLocationController.update);
 router.put('/linkLocation/:id',auth.isAuthenticated(), tourLocationController.linkTour);
 router.put('/unlinkLocation/:id',auth.isAuthenticated(), tourLocationController.unlinkTour);
 
-router.get('/getLocations', tourLocationController.locations);
+
 router.get('/getAllTours', controller.allTours);
+router.get('/getAllPublishedTours', controller.getAllPublishedTours);
+router.get('/getLocations', tourLocationController.locations);
 router.get('/getAllLocations', tourLocationController.allLocations);
 router.get('/:locationId', tourLocationController.singleLocation);
 router.get('/updateTour/:tourID',controller.singleTour);

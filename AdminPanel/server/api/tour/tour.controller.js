@@ -24,6 +24,25 @@ exports.delete = function(req, res) {
     });
   });
 };
+
+exports.getAllPublishedTours = function(req, res) {
+  Tour.find({status:true})
+    .sort({
+      createTime: -1
+    })
+    .exec(function(err, looks) {
+      if (err) {
+        return handleError(res, err);
+      }
+      if (!looks) {
+        return res.send(404);
+      }
+      console.log(looks);
+      return res.status(200)
+                     .json(looks);
+    });
+};
+
 exports.allTours = function(req, res) {
   Tour.find({})
     .sort({
@@ -80,6 +99,7 @@ exports.updateTour = function(req, res) {
 	}
   tour.title = req.body.title;
   tour.description = req.body.description;
+  tour.status = req.body.status;
   tour.createTime = Date.now();
 
   tour.save(function(err, savedTour) {
@@ -107,6 +127,7 @@ exports.upload = function(req, res) {
   newTour.image = '/assets/images/uploads/' + fileimage;
   newTour.title = req.body.title;
   newTour.description = req.body.description;
+  newTour.status = req.body.status;
   newTour.createTime = Date.now();
 
   newTour.save(function(err, look) {
@@ -182,42 +203,6 @@ exports.delete = function(req, res) {
         return handleError(res, err);
       }
       return res.send(200);
-    });
-  });
-};
-
-exports.addView = function(req, res) {
-  Tour.findById(req.params.id, function(err, look) {
-    if(err) {
-      return handleError(res, err);
-    }
-    if (!tour) {
-      return res.send(404);
-    }
-    tour.views++;
-    tour.save(function(err) {
-      if (err) {
-        return handle(res, err);
-      }
-      return res.json(tour);
-    });
-  });
-};
-
-exports.addUpvote = function(req, res) {
-  Tour.findById(req.params.id, function(err, tour) {
-    if(err) {
-      return handleError(res, err);
-    }
-    if(!tour) {
-      return res.send(404);
-    }
-    tour.upVotes++;
-    tour.save(function(err) {
-      if(err) {
-        return handleError(res, err);
-      }
-      return res.json(tour);
     });
   });
 };

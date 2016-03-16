@@ -35,6 +35,9 @@
                               <i ng-show="myForm.description.$error.required">*required</i>
                             </textarea>
                       </div>
+				<div class="controls">
+				<input type="radio" name="status" ng-value="true" required ng-model="editTour.status"> Publish Now<br>
+				<input type="radio" name="status"  ng-value="false"  ng-model="editTour.status"> Publish Later<br> </div>
 			
               <div class="controls">
                 <input class="bottom-marg-15"

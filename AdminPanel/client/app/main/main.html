@@ -90,6 +90,9 @@
                       data-placement="center"
                       data-template-url="app/main/editTour.html"
                       bs-modal="showModal">Info</button>
+					  
+		<label ng-if="tour.status==true"> Currently Live </label>
+		<label ng-if="tour.status==false"> Not yet published </label>
       </li>
 	  
     </ul>

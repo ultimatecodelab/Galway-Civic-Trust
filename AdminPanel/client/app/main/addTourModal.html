@@ -36,6 +36,7 @@
                         class="img-thumbnail img-responsive">
               </div>
              </div>
+			 
       <button type="submit"
                   class="btn btn-primary">Submit</button>
       <button type="button"
@@ -119,7 +120,11 @@
                 <img ng-show="myForm.file.$valid"
                         ngf-src="!picFile.$error && picFile"
                         class="img-thumbnail img-responsive">
-
+				<br>
+				<div class="controls">
+				<input type="radio" name="status" ng-value="true" required ng-model="tour.status"> Publish Now<br>
+				<input type="radio" name="status"  ng-value="false"  ng-model="tour.status"> Publish Later<br> </div>
+				
                 <button id="loadButton"
                             ng-disabled="!myForm.$valid"
                             class="btn btn-primary btn-lg"

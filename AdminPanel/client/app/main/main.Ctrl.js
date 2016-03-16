@@ -162,7 +162,7 @@
 
     var alertSuccess = $alert({
       title: 'Success! ',
-      content: 'New Tour added',
+      content: 'Updated',
       placement: 'top-right',
       container: '#alertContainer',
       type: 'success',
@@ -170,8 +170,8 @@
     })
 
     var alertFail = $alert({
-      title: 'Not saved',
-      content: 'New Tour failed to insert',
+      title: 'Couldn not update...',
+      content: 'Could not update your tour',
       placement: 'top-right',
       container: '#alertContainer',
       type: 'warning',
@@ -251,6 +251,7 @@
 		  tourid : $scope.editTour._id,
           title: $scope.editTour.title,
 		  description: $scope.editTour.description,
+		  status:$scope.editTour.status,
           _creator: $scope.user._id
         }
       }).then(function(resp) {
@@ -280,6 +281,7 @@
           file: file,
           title: $scope.tour.title,
 		  description: $scope.tour.description,
+		  status:$scope.tour.status,
           _creator: $scope.user._id
         }
       }).then(function(resp) {
