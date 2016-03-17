@@ -57,7 +57,7 @@
         return $http.get('/api/tour/' + location._id);
       }
 	  function getSpecificTour(tour) {
-	  console.log("Passing " + tour._id);
+	  console.log("All good up to here... " + tour._id);
         return $http.get('/api/tour/updateTour/' + tour._id);
       }
 
