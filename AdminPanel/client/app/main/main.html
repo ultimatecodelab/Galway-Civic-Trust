@@ -2,18 +2,11 @@
       <!-- Search, and Upload Button -->
       <div id="searchFilterWrap">
         <form id="searchForm">
-          <input type="text"
-                    id="searchBox"
-                    placeholder="Search by title"
-                    ng-model="searchTxt"
-                    ng-model-options="{debounce : 600}" />
+		<h2 style="color:#069">Total Tours : {{tours.length}}  </h2>
         </form>
         <div class="modal-backdrop-am-fade"
               id="sortByWrap">
-          Sort By : <i class="fa fa-calendar"
-                            ng-click="sortByTime()"></i>
-                    
-
+   
           <button class="btn btn-primary"
                       data-animation="am-fade-and-scale"
                       data-placement="center"
@@ -25,51 +18,19 @@
       
     </div>
 
-  <!-- Angular Grid -->
-  <!-- <div class="container" infinite-scroll="nextPage()" infinite-scroll-disabled="busy || noMoreData" infinite-scroll-distance="0.1">
-    <ul class="dynamic-grid angular-grid"
-          angular-grid="tours"
-          grid-width="275"
-          gutter-size="10"
-          angular-grid-id="gallery"
-          refresh-on-img-load="true">
-     <li data-ng-repeat="tour in tours track by $index"
-          class="grid"
-          ng-cloak>
-        <a ui-sref="location({ tourId: tour._id })"
-            class="lookLink">
-          <img ng-src="{{ tour.image }}"
-                  class="grid-img"
-                  data-actual-width="{{ (tour.image.actualWidth)}}*.8"
-                  data-actual-height="{{ (tour.image.actualHeight)}}*.8" />
-				  
-		  <div class="titleClass">
-            Tour: {{ tour.title.substr(0,50) }}
-          </div>
-          <div class="look-description-trim">
-            {{ tour.description.substr(0,80)}}
-          </div>
-          
-        </a>
-		<button class ="btn btn-danger" ng-click="deleteTour(tour)"> Delete</button>
-      </li>
-    </ul>
-   <div ng-show='busy'>Loading data...</div>
-  </div>
-</div>-->
-
-
  <!-- Angular Grid -->
-  <div class="container" infinite-scroll="nextPage()" infinite-scroll-disabled="busy || noMoreData" infinite-scroll-distance="0.1">
+  <div class="container" infinite-scroll="nextPage()"  infinite-scroll-disabled="busy || noMoreData" infinite-scroll-distance="0.1">
     <ul class="dynamic-grid angular-grid"
           angular-grid="tours"
           grid-width="275"
           gutter-size="10"
           angular-grid-id="gallery"
           refresh-on-img-load="true">
+		  
      <li data-ng-repeat="tour in tours track by $index"
           class="grid"
           ng-cloak>
+		 <div>
         <a ui-sref="location ({ tourId: tour._id })"
             class="lookLink">
           <img ng-src="{{ tour.image }}"
@@ -91,8 +52,8 @@
                       data-template-url="app/main/editTour.html"
                       bs-modal="showModal">Info</button>
 					  
-		<label ng-if="tour.status==true"> Currently Live </label>
-		<label ng-if="tour.status==false"> Not yet published </label>
+		<label style="color:#069" ng-if="tour.status==true"> Currently Live </label>
+		<label style="color:#FF0000" ng-if="tour.status==false"> Not yet published </label>
       </li>
 	  
     </ul>

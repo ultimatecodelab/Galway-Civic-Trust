@@ -20,6 +20,9 @@ router.put('/unlinkLocation/:id',auth.isAuthenticated(), tourLocationController.
 router.get('/getAllTours', controller.allTours);
 router.get('/getAllPublishedTours', controller.getAllPublishedTours);
 router.get('/getLocations', tourLocationController.locations);
+
+router.get('/:tourId/:walkNumber', tourLocationController.tourLocationWalk);
+
 router.get('/getAllLocations', tourLocationController.allLocations);
 router.get('/:locationId', tourLocationController.singleLocation);
 router.get('/updateTour/:tourID',controller.singleTour);

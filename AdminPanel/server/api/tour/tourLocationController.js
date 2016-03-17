@@ -171,6 +171,35 @@ exports.singleLocation = function(req, res) {
   });
 };
 
+
+exports.tourLocationWalk = function(req, res) {
+console.log("testing here...")
+  var id = req.query.tourId;
+  
+  LocationSchema.find({
+    tourIdArr: {
+      $in: [req.params.tourId]
+    },
+	walkNumber:req.params.walkNumber
+  })
+  .sort({
+    createTime: -1
+  })
+  .exec(function(err, spots) {
+  
+    if(err) {
+	//console.log("error are: " + err);
+      return handleError(res, err);
+    }
+	else{
+		console.log("found...")
+	}
+    console.log("Locations are" + spots);
+    return res.status(200)
+                   .json(spots);
+  });
+};
+
 //one of the important function...
 exports.locations = function(req, res) {
 //console.log("Testing...")
