@@ -45,7 +45,7 @@
 	</div>
     </thead>
     <tbody>
-    <tr  ng-init="selectLocation(tourSpot[0],0)" ng-repeat="location in tourSpot |filter:searchTxt | orderBy:'+walkNumber'"
+    <tr  ng-init="selectLocation(tourSpot[tourSpot.length-1],0)" ng-repeat="location in tourSpot |filter:searchTxt | orderBy:'+createTime'"
 	ng-style="{
 	'background-color': $index == selectedIndex ?'Lightgray' : ''
 	}"
@@ -61,7 +61,7 @@
 
   </table>
  </div>
-<div  ng-show="selectedLocation!=null && tourSpot.length!=0" class = "col-md-5">
+<div  ng-show="selectedIndex!=null && tourSpot.length!=0" class = "col-md-5">
 	<div class = "panel panel-default" >
 	<div class = "panel-body">
 	

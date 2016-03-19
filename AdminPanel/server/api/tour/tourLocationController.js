@@ -183,7 +183,7 @@ console.log("testing here...")
 	walkNumber:req.params.walkNumber
   })
   .sort({
-    createTime: -1
+    createTime: 1
   })
   .exec(function(err, spots) {
   
@@ -253,7 +253,7 @@ exports.updateCurrentLocation = function(req, res) {
 	  loc.yCoordinate = req.body.yCoordinate;
 	  loc.walkNumber = req.body.walkNumber;
 	  
-	  loc.createTime = Date.now();
+	  //loc.createTime = Date.now();
 
 	  loc.save(function(err, savedTour) {
 		if(err) {

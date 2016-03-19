@@ -133,7 +133,10 @@
       // $scope.tourSpot.splice(0, 0, resp.data);
 	   var location = $scope.editLocation;
 	   var index = $scope.tourSpot.indexOf($scope.selectedLocation); 
+		//$scope.selectedLocation = index;
+		$scope.selectLocation($scope.tourSpot[$scope.selectedLocation],index);
 		$scope.tourSpot[index] = resp.data;
+		
 	   $scope.editLocation.title = '';
         $scope.picFile = '';
         $scope.picPreview = false;
@@ -245,6 +248,7 @@
         console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
       });
     }//uploadtours
+	
 	console.log("calling init");
 	$scope.init();
 	console.log("After init");
