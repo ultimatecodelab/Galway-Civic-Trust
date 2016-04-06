@@ -54,7 +54,6 @@
 		<td >{{$index+1}}</td>
        <td>{{location.title}}</td>
 	   
-	   <td ng-model="walkNumber"> walk {{location.walkNumber}}</td>
 	 
     </tr>
     </tbody>
@@ -78,8 +77,6 @@
 		<dd> {{selectedLocation.xCoordinate}}</dd>
 		<dt> Location Long </dt>
 		<dd> {{selectedLocation.yCoordinate}}</dd>
-		<dt> Walk Number </dt>
-		<dd> {{selectedLocation.walkNumber}}</dd>
 		
 		
 		<dd> <td> <button class ="btn btn-primary" ng-click="unlinkLocation(selectedLocation)"> Remove from this tour only</button> </td>

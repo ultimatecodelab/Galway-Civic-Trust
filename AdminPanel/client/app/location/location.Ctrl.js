@@ -124,7 +124,7 @@
 		  location: $scope.editLocation.location,
 		  xCoordinate: $scope.editLocation.xCoordinate,
 		  yCoordinate: $scope.editLocation.yCoordinate,
-		  walkNumber: $scope.editLocation.walkNumber,
+		  //walkNumber: $scope.editLocation.walkNumber,
           _creator: $scope.user._id
         }
       }).then(function(resp) {
@@ -136,7 +136,6 @@
 		//$scope.selectedLocation = index;
 		$scope.selectLocation($scope.tourSpot[$scope.selectedLocation],index);
 		$scope.tourSpot[index] = resp.data;
-		
 	   $scope.editLocation.title = '';
         $scope.picFile = '';
         $scope.picPreview = false;
@@ -232,7 +231,7 @@
           description: $scope.locModal.description,
 		  xCoordinate : $scope.locModal.xCoordinate,
 		  yCoordinate : $scope.locModal.yCoordinate,
-		  walkNumber: $scope.locModal.walkNumber,
+		  //walkNumber: $scope.locModal.walkNumber,
           _creator: $scope.user._id
         }
       }).then(function(resp) {
@@ -240,6 +239,11 @@
 		$scope.tourSpot.splice(0, 0, resp.data);
         console.log('success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
         $scope.picPreview = false;
+		$scope.locModal.title = '';
+		$scope.locModal.location = '';
+		$scope.locModal.description = '';
+		$scope.locModal.xCoordinate = '';
+		$scope.locModal.yCoordinate = '';
        
       }, function(resp) {
         alertFail.show();

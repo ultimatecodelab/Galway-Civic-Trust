@@ -120,7 +120,7 @@ exports.upload = function(req, res) {
   newLocation.location = req.body.location;
   newLocation.xCoordinate = req.body.xCoordinate;
   newLocation.yCoordinate = req.body.yCoordinate;
-  newLocation.walkNumber = req.body.walkNumber;
+ // newLocation.walkNumber = req.body.walkNumber;
   //tour cat id
   newLocation.tourId = req.body.tourId;
  
@@ -179,8 +179,8 @@ console.log("testing here...")
   LocationSchema.find({
     tourIdArr: {
       $in: [req.params.tourId]
-    },
-	walkNumber:req.params.walkNumber
+    }//,
+	//walkNumber:req.params.walkNumber
   })
   .sort({
     createTime: 1
@@ -214,7 +214,7 @@ exports.locations = function(req, res) {
     }
   })
   .sort({
-    createTime: -1
+    createTime: 1
   })
   .exec(function(err, spots) {
   
@@ -251,7 +251,7 @@ exports.updateCurrentLocation = function(req, res) {
 	  loc.location = req.body.location;
 	  loc.xCoordinate = req.body.xCoordinate;
 	  loc.yCoordinate = req.body.yCoordinate;
-	  loc.walkNumber = req.body.walkNumber;
+	  //loc.walkNumber = req.body.walkNumber;
 	  
 	  //loc.createTime = Date.now();
 
