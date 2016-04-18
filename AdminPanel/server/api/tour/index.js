@@ -28,5 +28,6 @@ router.get('/updateTour/:tourID',controller.singleTour);
 router.delete('/:id',auth.isAuthenticated(), tourLocationController.delete);
 router.delete('/deleteTour/:id',auth.isAuthenticated(), controller.delete);
 router.get('/pullAllLocations/:tourId/', tourLocationController.tourLocationWalk);
+router.get('/:tourId/:walkNumber', tourLocationController.tourLocationWalk);
 
 module.exports = router;
