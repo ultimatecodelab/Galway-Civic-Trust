@@ -6,7 +6,7 @@ var path = require('path');
 var express = require('express');
 var utils = require('../../utils/utils.js');
 
-
+//delete tour controller
 exports.delete = function(req, res) {
   Tour.findById(req.params.id, function(err, tour) {
   console.log("The id is :" + req.params.id)
@@ -24,7 +24,7 @@ exports.delete = function(req, res) {
     });
   });
 };
-
+//gets all the published tours
 exports.getAllPublishedTours = function(req, res) {
   Tour.find({status:true})
     .sort({
@@ -42,7 +42,7 @@ exports.getAllPublishedTours = function(req, res) {
                      .json(looks);
     });
 };
-
+//displays all tours
 exports.allTours = function(req, res) {
   Tour.find({})
     .sort({
@@ -60,7 +60,7 @@ exports.allTours = function(req, res) {
                      .json(looks);
     });
 };
-
+//user specific tours
 exports.userTours = function(req, res) {
   var userEmail = req.query.email;
   Tour.find({
@@ -81,7 +81,7 @@ exports.userTours = function(req, res) {
   });
 };
 
-
+//updating tour
 exports.updateTour = function(req, res) {
   Tour.findById(req.body.tourid, function(err, tour) {
     if(err) {
@@ -108,8 +108,6 @@ exports.updateTour = function(req, res) {
       return res.send(500);
     } else {
       console.log(savedTour);
-      //res.status(200)
-           //.send(look);
 		   return res.json(savedTour);
     }
   });
@@ -117,8 +115,7 @@ exports.updateTour = function(req, res) {
   });
 };
 
-
-
+//upload function to upload a tour
 exports.upload = function(req, res) {
   var newTour = new Tour();
   var fileimage = req.middlewareStorage.fileimage;
@@ -142,6 +139,12 @@ exports.upload = function(req, res) {
   });
 };
 
+//function to return the single tour
+/*
+This js file contains all the controllers/functions required for CRUD operations and retrival of tours.
+please check index.js file, every API route contains a specific controller and based on the type of request, the 
+routes are protected using jwt
+*/
 
 exports.singleTour = function(req, res) {
   Tour.findById(req.params.tourID, function(err, tour) {
@@ -155,41 +158,7 @@ exports.singleTour = function(req, res) {
   });
 };
 
-exports.popTours = function(req, res) {
-  Tour.find(req.params.id)
-    .sort('-upVotes')
-    .limit(6)
-    .exec(function(err, looks) {
-      if (err) {
-        return handleError(res, err);
-      }
-      console.log(looks);
-      return res.json(looks);
-    });
-}
-
-exports.update = function(req, res) {
-  if(req.body._id) {
-    delete req.body._id;
-  }
-  Tour.findById(req.params.id, function(err, look) {
-    if(err) {
-      return handleError(res, err);
-      }
-      if(!look) {
-        return res.send(404);
-      }
-      var updated = _.merge(look, req.body);
-      updated.save(function(err) {
-        if(err) {
-          return handleError(res, err);
-        }
-        console.log(look);
-        return res.json(look);
-      });
-  });
-};
-
+//deleting the tour
 exports.delete = function(req, res) {
   Tour.findById(req.params.id, function(err, look) {
     if(err) {

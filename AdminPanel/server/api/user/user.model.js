@@ -7,24 +7,6 @@ var authTypes = ['github', 'twitter', 'facebook', 'google'];
 
 var UserSchema = new Schema({
   name: String,
-  gravatar: String,
-  looks: [{
-    type: Schema.ObjectId,
-    ref: 'Look'
-  }],
-  likes: [{
-    type: Schema.ObjectId,
-    ref: 'Look'
-  }],
-  details: {
-    website: String,
-    bio: String,
-    location: String,
-    twitter: String,
-    facebook: String,
-    instagram: String,
-    other: String
-  },
   email: {
     type: String,
     lowercase: true
@@ -35,11 +17,7 @@ var UserSchema = new Schema({
   },
   hashedPassword: String,
   provider: String,
-  salt: String,
-  facebook: {},
-  twitter: {},
-  github: {},
-  rssUrls: Array
+  salt: String
 });
 
 /**

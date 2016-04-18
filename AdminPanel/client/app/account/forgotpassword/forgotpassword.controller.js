@@ -7,15 +7,10 @@ angular.module('app')
     $scope.reset = function(form) {
       $scope.submitted = true;
       if(form.$valid) {
-        $http.post('http://gct.es.vc:9000/forgotpassword/?email=' + $scope.user.email)
+        $http.post('http://galwaytour.tk/forgotpassword/?email=' + $scope.user.email)
         .then( function() {
           $scope.message = 'An email with your new password has been sent to your email address.';
         });
-        // .catch( function() {
-        //   form.password.$setValidity('mongoose', false);
-        //   $scope.errors.other = 'Incorrect password';
-        //   $scope.message = '';
-        // });
       }
 		};
   });

@@ -22,6 +22,7 @@
 
              <div class="form-group">
                 <input type="text"
+						  name="titlelbl"
                           class="form-control"
                           placeholder="Title"
                           ng-model="editTour.title" required /><i ng-show="myForm.title.$error.required">*required</i>
@@ -36,8 +37,8 @@
                             </textarea>
                       </div>
 				<div class="controls">
-				<input type="radio" name="status" ng-value="true" required ng-model="editTour.status"> Publish Now<br>
-				<input type="radio" name="status"  ng-value="false"  ng-model="editTour.status"> Publish Later<br> </div>
+				<input type="radio" name="status" id="now" ng-value="true" required ng-model="editTour.status"> Publish Now<br>
+				<input type="radio" name="status" id="later" ng-value="false"  ng-model="editTour.status"> Publish Later<br> </div>
 			
               <div class="controls">
                 <input class="bottom-marg-15"
@@ -58,6 +59,7 @@
                         class="img-thumbnail img-responsive">
 
                 <button id="loadButton"
+					
                             ng-disabled="!myForm.$valid"
                             class="btn btn-primary btn-lg"
                             ng-click="updateTour(picFile)">Save Changes</button>
@@ -81,6 +83,7 @@
 
         <div class="modal-footer close-btn-main">
         <button type="button"
+				name="closeBtn"
                     class="btn btn-default pull-left"
                     ng-click="$hide()">Close</button>
                     </div>

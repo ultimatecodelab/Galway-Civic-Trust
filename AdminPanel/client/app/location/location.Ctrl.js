@@ -13,15 +13,13 @@
     $scope.id = $stateParams.tourId;
 	$scope.tourSpot = [];
 	$scope.locations={};
-	
 	$scope.locModal={}; //modal to bind with the form
-	
 	$scope.editLocation = {};
 	$scope.selectedIndex = 0;
 	$scope.selectedLocation = $scope.tourSpot[0];
 	$scope.selectedIndex = $scope.tourSpot[0];
-	$scope.editLocation2 = null;
-	$scope.updatedlocation = null;
+	$scope.editLocation2 = undefined;
+	$scope.updatedlocation = undefined;
 	$scope.buttonStatus = "Link";
 	
 	//unlink Location
@@ -53,8 +51,6 @@
 		  
 		  $scope.tourSpot.splice(0, 0, data.data);//modal array
 		  console.log("The title is: " + data.data._id);
-		  //$scope.tourSpot.data=data.data;
-		  //$scope.init();
 		  
         })
         .catch(function(err) {
@@ -81,7 +77,6 @@
 	 $scope.tours = [];
 	 toursAPI.getAllTours()
       .then(function(data) {
-        console.log('TOURS found ');
         console.log(data);
         $scope.tours = data.data;
       })
@@ -94,7 +89,6 @@
 		$scope.selectedLocation = spot;
 		
 		$scope.editLocation = function(location) {
-		console.log("passed this shit: " + location._id);
 		toursAPI.getUpdateLocation(location)
         .then(function(data) {
 		//console.log("new Data");
@@ -150,7 +144,7 @@
 	  
     }//uploadtours
 	
-	//------------------------------------------
+	//save location function
 	$scope.saveLocation = function() {
       var location = $scope.editLocation;
 	  var index = $scope.tourSpot.indexOf($scope.selectedLocation); 
@@ -215,7 +209,7 @@
           console.log('failed to delete location' + err);
         });
     }
-	
+	//upload a new location (function)
 	$scope.uploadPic = function(file) {
 	  //console.log($scope.tour);
       Upload.upload({
@@ -252,11 +246,7 @@
         console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
       });
     }//uploadtours
-	
-	console.log("calling init");
 	$scope.init();
-	console.log("After init");
-	 
 	}//upload pic
 	
 })();

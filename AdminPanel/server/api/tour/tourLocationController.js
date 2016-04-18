@@ -4,19 +4,16 @@ var path = require('path');
 var express = require('express');
 var utils = require('../../utils/utils.js');
 
-
+//can link one location to different tour. This prevent the duplication of same data
 exports.linkTour = function(req, res) {
-
-	console.log("Printing..................." + req.body.TourID)
 	LocationSchema.findById(req.params.id, function(err, location) {
-		if(err) {
-			return handleError(res, err);
-		}
-		if(!location) {
-		 console.log('failed... ')
-		  return res.send(404);
-		}
-		
+	if(err) {
+		return handleError(res, err);
+	}
+	if(!location) {
+	 console.log('failed... ')
+	  return res.send(404);
+	}
 		if(req.body.TourID){
 			if(location.tourIdArr.indexOf(req.body.TourID)==-1){
 			 
@@ -38,9 +35,8 @@ exports.linkTour = function(req, res) {
 	});//end of findby
 	
  };
- //unlink Tour-------------------->>>>>
+ //unlink location from specified tour controller
  exports.unlinkTour = function(req, res) {
-	console.log("Printing..................." + req.body.TourID)
 	LocationSchema.findById(req.params.id, function(err, location) {
 		if(err) {
 			return handleError(res, err);
@@ -65,7 +61,7 @@ exports.linkTour = function(req, res) {
 	});//end of findby
 	
  };
- 
+ //controller to retrieve all the locations
 exports.allLocations = function(req, res) {
   LocationSchema
   .find({})
@@ -106,12 +102,13 @@ exports.update = function(req, res) {
       });
   });
 };
+//uploading a new location
 exports.upload = function(req, res) {
   var newLocation = new LocationSchema();
-  var fileimage = req.middlewareStorage.fileimage;
+  var fileimage = req.middlewareStorage.fileimage; //middlewareStorage to get the file
 
   console.log(req.body);
-  newLocation.image = '/assets/images/uploads/' + fileimage;
+  newLocation.image = '/assets/images/uploads/' + fileimage; //image location
 
   newLocation.title = req.body.title;
   newLocation.tourIdArr.push(req.body.tourId)
@@ -120,36 +117,29 @@ exports.upload = function(req, res) {
   newLocation.location = req.body.location;
   newLocation.xCoordinate = req.body.xCoordinate;
   newLocation.yCoordinate = req.body.yCoordinate;
- // newLocation.walkNumber = req.body.walkNumber;
-  //tour cat id
   newLocation.tourId = req.body.tourId;
- 
   newLocation.createTime = Date.now();
-
-  newLocation.save(function(err, look) {
+  
+  newLocation.save(function(err, loc) {
     if(err) {
       console.log('error saving location');
       return res.send(500);
     } else {
-      console.log(look);
+      console.log(loc);
       res.status(200)
-           .send(look);
+           .send(loc);
     }
   });
 };
-
+//deleting a location
 exports.delete = function(req, res) {
   LocationSchema.findById(req.params.id, function(err, location) {
-  console.log("The id is :" + req.params.id)
     if(err) {
       return handleError(res, err);
     }
     if(!location) {
       return res.send(404);
     }
-	//if()
-	//var index = location.tourIdArr.indexOf(req.params.id);
-	//array.splice(index, 1);
     location.remove(function(err) {
       if(err) {
         return handleError(res, err);
@@ -158,7 +148,7 @@ exports.delete = function(req, res) {
     });
   });
 };
-
+//single location controller
 exports.singleLocation = function(req, res) {
   LocationSchema.findById(req.params.locationId, function(err, location) {
     if(err) {
@@ -170,8 +160,7 @@ exports.singleLocation = function(req, res) {
     return res.json(location);
   });
 };
-
-
+//tour walk number - controller
 exports.tourLocationWalk = function(req, res) {
 console.log("testing here...")
   var id = req.query.tourId;
@@ -200,14 +189,9 @@ console.log("testing here...")
   });
 };
 
-//one of the important function...
+//returns all the locations, sorted by the created time...
 exports.locations = function(req, res) {
-//console.log("Testing...")
   var id = req.query.tourId;
-  //algorithm
-  //loop through the collections
-  console.log("ID passed as parameter: " + id);
-  
   LocationSchema.find({
     tourIdArr: {
       $in: [req.query.tourId]
@@ -219,18 +203,13 @@ exports.locations = function(req, res) {
   .exec(function(err, spots) {
   
     if(err) {
-	//console.log("error are: " + err);
       return handleError(res, err);
     }
-	else{
-		console.log("found...")
-	}
-    console.log("Locations are" + spots);
     return res.status(200)
                    .json(spots);
   });
 };
-//--------------------------------------------
+//update function for updating a location
 exports.updateCurrentLocation = function(req, res) {
   LocationSchema.findById(req.body.locationID, function(err, loc) {
     if(err) {
@@ -251,8 +230,8 @@ exports.updateCurrentLocation = function(req, res) {
 	  loc.location = req.body.location;
 	  loc.xCoordinate = req.body.xCoordinate;
 	  loc.yCoordinate = req.body.yCoordinate;
-	  //loc.walkNumber = req.body.walkNumber;
 	  
+	  //loc.walkNumber = req.body.walkNumber;
 	  //loc.createTime = Date.now();
 
 	  loc.save(function(err, savedTour) {
@@ -261,8 +240,6 @@ exports.updateCurrentLocation = function(req, res) {
 		  return res.send(500);
 		} else {
 		  console.log(savedTour);
-		  //res.status(200)
-			   //.send(look);
 			   return res.json(savedTour);
 		}
 	  });

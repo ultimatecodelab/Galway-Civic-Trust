@@ -1,11 +1,12 @@
 'use strict';
-
+//importing other js files
 var controller = require('./tour.controller');
 var tourLocationController = require('./tourLocationController');
 var express = require('express');
 var router = express.Router();
 var auth = require('../../auth/auth.service');
 
+//routes
 router.post('/upload', auth.isAuthenticated(), controller.upload);
 router.post('/updateTour', auth.isAuthenticated(), controller.updateTour);
 router.post('/updateCurrentLocation', auth.isAuthenticated(), tourLocationController.updateCurrentLocation); //location controller

@@ -18,12 +18,6 @@ module.exports = function(app) {
  
   app.post('/forgotpassword', require('./forgotpassword').reset);
   
-  //app.use('/api/cat/', require('./api/look'));
-
-  // All undefined asset or api routes should return a 404
-  //app.route('/:url(api|auth|components|app|bower_components|assets)/*')
-   //.get(errors[404]);
-
 
   app.route('/*')
     .get(function(req, res) {
