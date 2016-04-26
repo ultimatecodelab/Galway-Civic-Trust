@@ -5,6 +5,8 @@
 #### Course : Software Development(Honours)
 #### Module : Applied Project and minor dissertation - Final Year Project
 
+####**Project video Demo** : http://sendvid.com/ley01nxu
+
 ##System Architecture
 
 ![Alt text](https://github.com/ultimatecodelab/Galway-Civic-Trust/blob/master/architectureDiagram.PNG "Optional title")
