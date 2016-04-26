@@ -63,7 +63,9 @@ It contains everything about the project including:
 * System Evaluation  and Conclusion. 
 
 ##Deployment:
-**Admin Portal (Backend) is hosted on Digital ocean and is live at :** http://galwaytour.tk/
+**Admin Portal (Backend) is hosted on Digital ocean. You can also run the project locally provided you  have installed Node/Npm/MongoDb etc.  Please have a look at the project demo (video) http://sendvid.com/ley01nxu. It shows everything about the project, where it is  deployed and how mobile application is consuming the data from remote server/backend.
+
+Project live at:  http://galwaytour.tk/
 
 **APK for mobile app is provide at** : https://github.com/TrevorDavies/Galway-Civic-Trust 
  
