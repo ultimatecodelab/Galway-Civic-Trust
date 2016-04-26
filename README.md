@@ -46,7 +46,7 @@ documentation.
 ####Send Grid
 
 ##Project Resources:
-**Admin Panel (Back-end / API )** : [a link]( https://github.com/ultimatecodelab/Galway-Civic-Trust){:target="_blank"} 
+**Admin Panel (Back-end / API )** : https://github.com/ultimatecodelab/Galway-Civic-Trust
 
 **Ionic mobile application that consume data from an API::** https://github.com/TrevorDavies/Galway-Civic-Trust
 
