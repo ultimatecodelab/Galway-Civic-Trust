@@ -28,7 +28,8 @@ the database, which is provided by the API. The mobile application makes
 extensive use of Google’s Map API for both dynamic and static maps used
 within the mobile application. The mobile application was developed using
 the Ionic Framework and Angular JS.
-Authors This project has been developed by 3 fourth year students: Arjun
+
+**Authors** This project has been developed by 3 fourth year students: Arjun
 Kharel(myself), Trevor Davies and Patryk Piecha for the Bachelors of Science
 Honours Degree in Software Development. Arjun was responsible for the development
 of the back-end(Admin Portal) web application and also the API
