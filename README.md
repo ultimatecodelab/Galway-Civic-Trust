@@ -1,7 +1,11 @@
-# Galway-Civic-Trust - Software Development Year 4 - Final year project
-#### Developer :   Arjun Kharel, Trevor Davies, and Patryk Piecha
+## Walking Tours System for the Galway Civic Trust using MEAN stack and Ionic Framework
 
-#### System Architecture
+#### Developer :   Arjun Kharel, Trevor Davies, and Patryk Piecha
+#### Galway - Mayo Institute of Technology
+#### Course : Software Development(Honours)
+#### Module : Applied Project and minor dissertation - Final Year Project
+
+##System Architecture
 
 ![Alt text](https://github.com/ultimatecodelab/Galway-Civic-Trust/blob/master/architectureDiagram.PNG "Optional title")
 
@@ -33,12 +37,12 @@ responsible for the mobile application and every one of us contributed in the
 documentation.
 
 ##Technologies
-##MEAN stack  (MongoDb/ ExpressJs/ Node.js / Angularjs)
-##Ioinic Framework
-##JWT Authencation
-##Send Grid
+####MEAN stack  (MongoDb/ ExpressJs/ Node.js / Angularjs)
+####Ioinic Framework
+####JWT Authencation
+####Send Grid
 
-###Project Resources:
+##Project Resources:
 **Admin Panel (Back-end / API )** : https://github.com/ultimatecodelab/Galway-Civic-Trust
 
 **Ionic mobile application that consume data from an API::** https://github.com/TrevorDavies/Galway-Civic-Trust
